@@ -1,5 +1,6 @@
 package com.viniciusantos2105.userapi.domain.user;
 
+import com.viniciusantos2105.userapi.exception.resource.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -25,8 +26,7 @@ public class UserRepositoryImpl {
         query.setParameter("userEmail", userEmail);
 
         if(query.getResultList().isEmpty()) {
-            //TODO: tratar exceção
-            throw new RuntimeException();
+            throw ResourceNotFoundException.create("Usuário não encontrado", "User", 404);
         }
         return query.getSingleResult();
     }

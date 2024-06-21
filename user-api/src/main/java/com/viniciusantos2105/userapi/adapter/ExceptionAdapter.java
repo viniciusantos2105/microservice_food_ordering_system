@@ -14,8 +14,7 @@ public class ExceptionAdapter {
     public static String toJson(CustomException exception) {
         Map<String, Object> details = new HashMap<>();
         Optional.ofNullable(exception.getType()).ifPresent(type -> details.put("type", type));
-        Optional.ofNullable(exception.getMessage()).ifPresent(message -> details.put("message", message));
-        Optional.ofNullable(exception.getStatus()).ifPresent(status -> details.put("status", status));
+        Optional.ofNullable(exception.getCause()).ifPresent(cause -> details.put("cause", exception));
 
         Map<String, Object> combinedJson = objectMapper.convertValue(exception.toJsonObject(), Map.class);
         if (!details.isEmpty()) {

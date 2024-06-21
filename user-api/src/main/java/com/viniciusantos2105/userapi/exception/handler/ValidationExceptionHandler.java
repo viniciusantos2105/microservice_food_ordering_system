@@ -1,8 +1,8 @@
 package com.viniciusantos2105.userapi.exception.handler;
 
 import com.viniciusantos2105.userapi.adapter.ExceptionAdapter;
-import com.viniciusantos2105.userapi.exception.InvalidArgumentsException;
-import com.viniciusantos2105.userapi.exception.ValidationException;
+import com.viniciusantos2105.userapi.exception.validation.InvalidArgumentsException;
+import com.viniciusantos2105.userapi.exception.validation.ValidationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

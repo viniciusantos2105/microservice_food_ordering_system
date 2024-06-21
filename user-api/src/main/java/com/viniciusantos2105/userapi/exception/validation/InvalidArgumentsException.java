@@ -1,4 +1,4 @@
-package com.viniciusantos2105.userapi.exception;
+package com.viniciusantos2105.userapi.exception.validation;
 
 public class InvalidArgumentsException extends ValidationException {
     public InvalidArgumentsException(String message, String details) {
