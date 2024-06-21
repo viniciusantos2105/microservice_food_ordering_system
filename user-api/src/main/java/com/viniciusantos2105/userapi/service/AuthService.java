@@ -4,6 +4,7 @@ import com.viniciusantos2105.userapi.config.security.TokenService;
 import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
 import com.viniciusantos2105.userapi.dto.LoginRequestDto;
 import com.viniciusantos2105.userapi.dto.LoginResponseDto;
+import com.viniciusantos2105.userapi.exception.resource.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,6 @@ public class AuthService {
             var token = tokenService.gerandoToken(user);
             return LoginResponseDto.create(token);
         }
-        //TODO: Tratar exception
-        throw new RuntimeException();
+        throw ResourceNotFoundException.create("Usuário ou senha inválidos", "User", 404);
     }
 }
