@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum UserType  {
+public enum UserType {
 
     OWNER("Dono"),
     CLIENT("Cliente");

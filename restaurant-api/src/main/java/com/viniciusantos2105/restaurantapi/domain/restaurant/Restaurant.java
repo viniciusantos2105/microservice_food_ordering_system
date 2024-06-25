@@ -1,7 +1,7 @@
 package com.viniciusantos2105.restaurantapi.domain.restaurant;
 
 import com.viniciusantos2105.restaurantapi.domain.user.User;
-import com.viniciusantos2105.restaurantapi.dto.RestaurantRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,11 +25,11 @@ public class Restaurant {
     private String restaurantName;
     @Column(name = "restaurant_address")
     private String restaurantAddress;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "restaurant_foods",
-        joinColumns = @JoinColumn(name = "restaurant_id"),
-        inverseJoinColumns = @JoinColumn(name = "food_id"))
+            name = "restaurant_foods",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> restaurantMenu;
 
     public static Restaurant create(User user, RestaurantRequestDto request) {

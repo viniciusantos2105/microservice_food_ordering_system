@@ -1,7 +1,9 @@
 package com.viniciusantos2105.restaurantapi.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +24,8 @@ public class User {
     @Column(name = "user_type")
     private UserType userType;
 
-    public User() {}
+    public User() {
+    }
 
     public User(Long userId, String userFullName, String userEmail, String userPassword, UserType userType) {
         this.userId = userId;

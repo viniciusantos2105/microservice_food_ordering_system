@@ -17,4 +17,15 @@ public class RestaurantRepositoryImpl {
 
         if (!query.getResultList().isEmpty()) throw new RuntimeException("Restaurante já cadastrado");
     }
+
+    public Restaurant findRestaurantById(Long restaurantId) {
+        TypedQuery<Restaurant> query = entityManager.createQuery("SELECT r FROM Restaurant r WHERE r.restaurantId = :restaurantId", Restaurant.class);
+        query.setParameter("restaurantId", restaurantId);
+
+        if (query.getResultList().isEmpty()) {
+            throw new RuntimeException("Restaurante não encontrado");
+        }
+
+        return query.getSingleResult();
+    }
 }

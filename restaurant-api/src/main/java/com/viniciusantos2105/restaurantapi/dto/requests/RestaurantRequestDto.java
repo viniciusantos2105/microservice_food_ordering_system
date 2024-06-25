@@ -1,4 +1,4 @@
-package com.viniciusantos2105.restaurantapi.dto;
+package com.viniciusantos2105.restaurantapi.dto.requests;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

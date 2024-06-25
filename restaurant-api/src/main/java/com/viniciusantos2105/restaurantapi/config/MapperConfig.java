@@ -1,7 +1,7 @@
 package com.viniciusantos2105.restaurantapi.config;
 
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
-import com.viniciusantos2105.restaurantapi.dto.RestaurantResponseDto;
+import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

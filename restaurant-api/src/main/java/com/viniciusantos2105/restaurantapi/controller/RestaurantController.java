@@ -1,10 +1,9 @@
 package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
-import com.viniciusantos2105.restaurantapi.dto.RestaurantRequestDto;
-import com.viniciusantos2105.restaurantapi.dto.RestaurantResponseDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
 import com.viniciusantos2105.restaurantapi.service.RestaurantService;
 import com.viniciusantos2105.restaurantapi.service.UserService;
 import jakarta.validation.Valid;
@@ -27,9 +26,10 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public ResponseEntity<RestaurantResponseDto> createRestaurant(@RequestHeader("Authorization") String token , @RequestBody @Valid RestaurantRequestDto request) {
+    public ResponseEntity<RestaurantResponseDto> createRestaurant(@RequestHeader("Authorization") String token, @RequestBody @Valid RestaurantRequestDto request) {
         User user = userService.getUser(token).block();
         RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.createRestaurant(user, request), RestaurantResponseDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 }

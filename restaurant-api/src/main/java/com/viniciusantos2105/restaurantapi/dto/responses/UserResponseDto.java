@@ -1,4 +1,4 @@
-package com.viniciusantos2105.restaurantapi.dto;
+package com.viniciusantos2105.restaurantapi.dto.responses;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +9,4 @@ import lombok.Setter;
 public class UserResponseDto {
     private String userFullName;
     private String userEmail;
-
-
 }

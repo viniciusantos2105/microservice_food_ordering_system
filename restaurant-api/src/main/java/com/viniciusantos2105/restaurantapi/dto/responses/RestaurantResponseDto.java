@@ -1,4 +1,4 @@
-package com.viniciusantos2105.restaurantapi.dto;
+package com.viniciusantos2105.restaurantapi.dto.responses;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class RestaurantResponseDto {
 
+    private Long restaurantId;
     private String restaurantName;
     private String restaurantAddress;
     private UserResponseDto restaurantOwner;
