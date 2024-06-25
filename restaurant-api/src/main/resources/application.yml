@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/restaurant-api
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+    open-in-view: true
+    show-sql: false
+    defer-datasource-initialization: false
+microservice:
+  name: "user-api"
+  url: "http://localhost:8080/api/user"
+server:
+  port: 8081
