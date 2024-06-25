@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class UserResponseDto  {
-    private String userName;
+    private String userFullName;
     private String userEmail;
     private  String userType;
 

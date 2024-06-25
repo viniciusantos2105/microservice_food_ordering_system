@@ -4,6 +4,7 @@ import com.viniciusantos2105.userapi.exception.resource.ResourceNotFoundExceptio
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class UserRepositoryImpl {
         if (!query.getResultList().isEmpty()) throw new RuntimeException("Email já cadastrado");
     }
 
+    @Transactional
     public User findUserByEmail(String userEmail) {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);
         query.setParameter("userEmail", userEmail);

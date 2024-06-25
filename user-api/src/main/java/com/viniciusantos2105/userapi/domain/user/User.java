@@ -23,7 +23,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     @Column(name = "user_name")
-    private String userName;
+    private String userFullName;
     @Column(name = "user_email", unique = true)
     private String userEmail;
     @Column(name = "user_password")
@@ -33,9 +33,9 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(Long userId, String userName, String userEmail, String userPassword, UserType userType) {
+    public User(Long userId, String userFullName, String userEmail, String userPassword, UserType userType) {
         this.userId = userId;
-        this.userName = userName;
+        this.userFullName = userFullName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userType = userType;
@@ -59,7 +59,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.userFullName;
     }
 
     @Override

@@ -21,8 +21,8 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("manuOS-API")
-                    .withSubject(user.getUsername())
+                    .withIssuer("user-API")
+                    .withSubject(user.getUserEmail())
                     .withExpiresAt(gerandoTempoToken())
                     .sign(algorithm);
         } catch (Exception ex) {
@@ -35,7 +35,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("manuOS-API")
+                    .withIssuer("user-API")
                     .build()
                     .verify(token)
                     .getSubject();
@@ -44,6 +44,7 @@ public class TokenService {
             throw new RuntimeException();
         }
     }
+
 
     private Instant gerandoTempoToken() {
         return LocalDateTime.now().plusHours(6).toInstant(ZoneOffset.of("-03:00"));

@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class UserRequestDto implements Serializable {
-    @NotEmpty(message = "Nome não pode ser vazio") String userName;
+    @NotEmpty(message = "Nome não pode ser vazio") String userFullName;
     @Email(message = "Email invalido")
     @NotEmpty(message = "Email não pode ser vazio") String userEmail;
     @NotEmpty(message = "Senha invalida") String userPassword;

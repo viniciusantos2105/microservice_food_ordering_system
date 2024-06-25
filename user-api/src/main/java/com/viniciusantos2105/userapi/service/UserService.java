@@ -1,9 +1,11 @@
 package com.viniciusantos2105.userapi.service;
 
+import com.viniciusantos2105.userapi.config.security.TokenService;
 import com.viniciusantos2105.userapi.domain.user.User;
 import com.viniciusantos2105.userapi.domain.user.UserRepository;
 import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
 import com.viniciusantos2105.userapi.dto.UserResponseDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,20 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final PasswordEncoder encoder;
+    private final TokenService tokenService;
     private final UserRepository userRepository;
     private final UserRepositoryImpl userRepositoryImpl;
-
 
     public User createUser(User user) {
         userRepositoryImpl.validateUserEmail(user.getUserEmail());
         user.setUserPassword(encoder.encode(user.getUserPassword()));
         return userRepository.save(user);
+    }
+
+    public User getUser(String token) {
+        token = token.replace("Bearer ", "");
+        var email = tokenService.validarToken(token);
+        return userRepositoryImpl.findUserByEmail(email);
     }
 
 }
