@@ -1,9 +1,7 @@
 package com.viniciusantos2105.userapi.domain.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,7 +29,8 @@ public class User implements UserDetails {
     @Column(name = "user_type")
     private UserType userType;
 
-    public User() {}
+    public User() {
+    }
 
     public User(Long userId, String userFullName, String userEmail, String userPassword, UserType userType) {
         this.userId = userId;

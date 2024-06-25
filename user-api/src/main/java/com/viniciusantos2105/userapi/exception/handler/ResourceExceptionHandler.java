@@ -3,10 +3,8 @@ package com.viniciusantos2105.userapi.exception.handler;
 
 import com.viniciusantos2105.userapi.adapter.ExceptionAdapter;
 import com.viniciusantos2105.userapi.exception.resource.ResourceException;
-import com.viniciusantos2105.userapi.exception.validation.ValidationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

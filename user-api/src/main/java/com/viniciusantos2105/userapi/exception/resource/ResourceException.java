@@ -2,7 +2,7 @@ package com.viniciusantos2105.userapi.exception.resource;
 
 import com.viniciusantos2105.userapi.exception.CustomException;
 
-public class ResourceException  extends CustomException {
+public class ResourceException extends CustomException {
 
     public ResourceException(String message, String type, Integer status) {
         this.message = message;

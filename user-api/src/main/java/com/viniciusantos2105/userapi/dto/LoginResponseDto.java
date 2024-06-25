@@ -1,12 +1,11 @@
 package com.viniciusantos2105.userapi.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class LoginResponseDto {
 
-    private String token;
+    private final String token;
 
     public LoginResponseDto(String token) {
         this.token = token;

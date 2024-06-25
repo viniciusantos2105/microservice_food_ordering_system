@@ -4,8 +4,6 @@ import com.viniciusantos2105.userapi.config.security.TokenService;
 import com.viniciusantos2105.userapi.domain.user.User;
 import com.viniciusantos2105.userapi.domain.user.UserRepository;
 import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
-import com.viniciusantos2105.userapi.dto.UserResponseDto;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

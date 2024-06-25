@@ -7,8 +7,6 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public class UserRepositoryImpl {
 
@@ -27,7 +25,7 @@ public class UserRepositoryImpl {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);
         query.setParameter("userEmail", userEmail);
 
-        if(query.getResultList().isEmpty()) {
+        if (query.getResultList().isEmpty()) {
             throw ResourceNotFoundException.create("Usuário não encontrado", "User", 404);
         }
         return query.getSingleResult();

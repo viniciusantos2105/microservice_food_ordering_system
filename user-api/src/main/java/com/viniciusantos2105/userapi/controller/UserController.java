@@ -21,14 +21,14 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDto> createUser(@RequestBody @Valid UserRequestDto request){
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody @Valid UserRequestDto request) {
         User user = adapter.mapSourceToTarget(request, User.class);
         UserResponseDto response = adapter.mapSourceToTarget(service.createUser(user), UserResponseDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public ResponseEntity<User> findUserByToken(@RequestHeader("Authorization") String token){
+    public ResponseEntity<User> findUserByToken(@RequestHeader("Authorization") String token) {
         User user = service.getUser(token);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }

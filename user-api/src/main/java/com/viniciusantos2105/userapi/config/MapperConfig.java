@@ -1,6 +1,5 @@
 package com.viniciusantos2105.userapi.config;
 
-import com.viniciusantos2105.userapi.domain.user.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

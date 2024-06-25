@@ -2,7 +2,7 @@ package com.viniciusantos2105.userapi.exception;
 
 import java.util.Map;
 
-public abstract class CustomException extends RuntimeException{
+public abstract class CustomException extends RuntimeException {
 
     public String message;
     public String type;
