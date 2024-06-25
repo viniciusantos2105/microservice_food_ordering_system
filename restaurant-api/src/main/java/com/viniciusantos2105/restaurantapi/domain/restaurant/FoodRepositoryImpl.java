@@ -1,5 +1,6 @@
 package com.viniciusantos2105.restaurantapi.domain.restaurant;
 
+import com.viniciusantos2105.restaurantapi.exception.resource.ResourceAlreadyExists;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -18,6 +19,6 @@ public class FoodRepositoryImpl {
         query.setParameter("restaurantId", restaurantId);
 
 
-        if (!query.getResultList().isEmpty()) throw new RuntimeException("Comida já cadastrada");
+        if (!query.getResultList().isEmpty()) throw ResourceAlreadyExists.create("Já existe um prato com esse nome", "foodName");
     }
 }
