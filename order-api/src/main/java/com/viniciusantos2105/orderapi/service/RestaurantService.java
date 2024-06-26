@@ -22,11 +22,10 @@ public class RestaurantService {
     }
 
     public List<Food> getFoods(FoodsListRequestDto request) {
-        List<Food> list = webClient.post()
+        return webClient.post()
                 .uri(urlRestaurantApi + "/food")
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<Food>>() {}).block();
-        return list;
     }
 }
