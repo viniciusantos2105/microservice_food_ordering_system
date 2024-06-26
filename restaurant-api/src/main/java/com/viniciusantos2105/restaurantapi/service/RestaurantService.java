@@ -12,6 +12,8 @@ import com.viniciusantos2105.restaurantapi.exception.unauthorized.UnauthorizedAc
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RestaurantService {
@@ -19,6 +21,18 @@ public class RestaurantService {
     private final Adapter adapter;
     private final RestaurantRepository restaurantRepository;
     private final RestaurantRepositoryImpl restaurantRepositoryImpl;
+
+    public List<Restaurant> listRestaurants() {
+        return restaurantRepository.findAll();
+    }
+
+    public Restaurant findRestaurantWithUserValidation(Long restaurantId, User user) {
+        Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
+        if (!restaurant.getRestaurantOwner().getUserId().equals(user.getUserId())) {
+            throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
+        }
+        return restaurant;
+    }
 
     public Restaurant createRestaurant(RestaurantRequestDto request, User user) {
         restaurantRepositoryImpl.validateRestaurantName(request.getRestaurantName());
@@ -32,20 +46,22 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    private void update(Restaurant restaurant, RestaurantEditRequestDto request){
+    private void update(Restaurant restaurant, RestaurantEditRequestDto request) {
         Restaurant updatedRestaurant = adapter.mapSourceToTarget(request, Restaurant.class);
         adapter.updateTargetWithSource(updatedRestaurant, restaurant);
     }
 
-    public Restaurant findRestaurantWithUserValidation(Long restaurantId, User user) {
-        Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
-        if (!restaurant.getRestaurantOwner().getUserId().equals(user.getUserId())) {
-            throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
-        }
-        return restaurant;
+    public void deleteRestaurant(Long restaurantId, User user) {
+        Restaurant restaurant = findRestaurantWithUserValidation(restaurantId, user);
+        restaurantRepository.delete(restaurant);
     }
 
-    public void removeFood(Restaurant restaurant, Food food){
+    public void addFoodToMenu(Restaurant restaurant, Food food) {
+        restaurant.getRestaurantMenu().add(food);
+        restaurantRepository.save(restaurant);
+    }
+
+    public void removeFood(Restaurant restaurant, Food food) {
         restaurant.getRestaurantMenu().remove(food);
         restaurantRepository.save(restaurant);
     }

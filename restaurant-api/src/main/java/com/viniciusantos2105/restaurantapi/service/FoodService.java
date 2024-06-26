@@ -7,8 +7,8 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.FoodRepository;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.FoodRepositoryImpl;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
-import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class FoodService {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         foodRepositoryImpl.validateFoodName(request.getFoodName(), restaurantId);
         Food food = Food.create(restaurant, request);
-        restaurant.getRestaurantMenu().add(food);
+        restaurantService.addFoodToMenu(restaurant, food);
         return foodRepository.save(food);
     }
 
@@ -38,13 +38,13 @@ public class FoodService {
 
     public Food updateFood(Long restaurantId, Long foodId, FoodEditRequestDto request, User user) {
         restaurantService.findRestaurantWithUserValidation(restaurantId, user);
-        Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
         foodRepositoryImpl.validateFoodName(request.getFoodName(), restaurantId);
+        Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
         update(food, request);
         return foodRepository.save(food);
     }
 
-    private void update(Food food, FoodEditRequestDto request){
+    private void update(Food food, FoodEditRequestDto request) {
         Food updatedFood = adapter.mapSourceToTarget(request, Food.class);
         adapter.updateTargetWithSource(updatedFood, food);
     }

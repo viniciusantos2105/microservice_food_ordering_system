@@ -1,16 +1,20 @@
 package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
+import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseListDto;
 import com.viniciusantos2105.restaurantapi.service.RestaurantService;
 import com.viniciusantos2105.restaurantapi.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurant")
@@ -26,6 +30,13 @@ public class RestaurantController {
         this.adapter = adapter;
     }
 
+    @GetMapping
+    public ResponseEntity<List<RestaurantResponseListDto>> listRestaurants() {
+        List<Restaurant> restaurantList = restaurantService.listRestaurants();
+        List<RestaurantResponseListDto> responseList = restaurantList.stream().toList().stream().map(restaurant -> adapter.mapSourceToTarget(restaurant, RestaurantResponseListDto.class)).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(responseList);
+    }
+
     @PostMapping
     public ResponseEntity<RestaurantResponseDto> createRestaurant(@RequestHeader("Authorization") String token, @RequestBody @Valid RestaurantRequestDto request) {
         User user = userService.getUser(token).block();
@@ -38,5 +49,12 @@ public class RestaurantController {
         User user = userService.getUser(token).block();
         RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.updateRestaurant(restaurantId, request, user), RestaurantResponseDto.class);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity<Void> deleteRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId) {
+        User user = userService.getUser(token).block();
+        restaurantService.deleteRestaurant(restaurantId, user);
+        return ResponseEntity.noContent().build();
     }
 }
