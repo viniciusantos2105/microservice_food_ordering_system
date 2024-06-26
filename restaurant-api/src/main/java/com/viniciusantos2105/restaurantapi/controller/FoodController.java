@@ -4,6 +4,7 @@ import com.viniciusantos2105.restaurantapi.adapter.Adapter;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestEditDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseListDto;
 import com.viniciusantos2105.restaurantapi.service.FoodService;
@@ -40,6 +41,13 @@ public class FoodController {
     public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId) {
         List<Food> foods = foodService.listFoodsByRestaurant(restaurantId, userService.getUser(token).block());
         List<FoodResponseListDto> response = foods.stream().toList().stream().map(food -> adapter.mapSourceToTarget(food, FoodResponseListDto.class)).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PutMapping("/{restaurantId}/{foodId}")
+    public ResponseEntity<FoodResponseDto> updateFood(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @PathVariable Long foodId, @RequestBody @Valid FoodRequestEditDto request) {
+        User user = userService.getUser(token).block();
+        FoodResponseDto response = adapter.mapSourceToTarget(foodService.updateFood(restaurantId, foodId, request, user), FoodResponseDto.class);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
