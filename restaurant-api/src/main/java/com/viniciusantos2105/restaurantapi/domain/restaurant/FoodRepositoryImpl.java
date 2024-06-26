@@ -36,4 +36,15 @@ public class FoodRepositoryImpl {
 
         return query.getSingleResult();
     }
+
+    public Food findFoodById(Long fooId){
+        TypedQuery<Food> query = entityManager.createQuery("SELECT f FROM Food f WHERE f.foodId = :foodId", Food.class);
+        query.setParameter("foodId", fooId);
+
+        if (query.getResultList().isEmpty()) {
+            throw ResourceNotFoundException.create("Prato não encontrado", "foodId");
+        }
+
+        return query.getSingleResult();
+    }
 }

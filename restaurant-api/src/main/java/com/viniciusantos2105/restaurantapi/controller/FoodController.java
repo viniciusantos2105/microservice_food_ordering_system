@@ -5,8 +5,10 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.FoodsListRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseListDto;
+import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseOrderDto;
 import com.viniciusantos2105.restaurantapi.service.FoodService;
 import com.viniciusantos2105.restaurantapi.service.UserService;
 import jakarta.validation.Valid;
@@ -34,6 +36,13 @@ public class FoodController {
     public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId) {
         List<Food> foods = foodService.listFoodsByRestaurant(restaurantId, userService.getUser(token).block());
         List<FoodResponseListDto> response = foods.stream().toList().stream().map(food -> adapter.mapSourceToTarget(food, FoodResponseListDto.class)).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<List<FoodResponseOrderDto>> findFoods(@RequestBody @Valid FoodsListRequestDto request) {
+        List<Food> foods = foodService.findFoodById(request);
+        List<FoodResponseOrderDto> response = foods.stream().toList().stream().map(food -> adapter.mapSourceToTarget(food, FoodResponseOrderDto.class)).toList();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

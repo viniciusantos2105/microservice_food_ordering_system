@@ -9,6 +9,8 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.FoodsListRequestDto;
+import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,18 @@ public class FoodService {
         Food food = Food.create(restaurant, request);
         restaurantService.addFoodToMenu(restaurant, food);
         return foodRepository.save(food);
+    }
+
+    public List<Food> findFoodById(FoodsListRequestDto request) {
+        List<Food> foodList = request.getFoodsSelecteds().stream()
+                .map(foodRepositoryImpl::findFoodById)
+                .toList();
+        Long restaurantId = foodList.get(0).getRestaurant().getRestaurantId();
+        if (foodList.stream().anyMatch(food -> !food.getRestaurant().getRestaurantId().equals(restaurantId))) {
+            throw InvalidArgumentsException.create("Os alimentos selecionados pertencem a restaurantes diferentes");
+        }
+
+        return foodList;
     }
 
     public List<Food> listFoodsByRestaurant(Long restaurantId, User user) {
