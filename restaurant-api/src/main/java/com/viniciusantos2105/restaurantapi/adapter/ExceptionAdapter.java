@@ -11,6 +11,9 @@ import java.util.Optional;
 public class ExceptionAdapter {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    private ExceptionAdapter() {
+    }
+
     public static String toJson(CustomException exception) {
         Map<String, Object> details = new HashMap<>();
         Optional.ofNullable(exception.getType()).ifPresent(type -> details.put("type", type));

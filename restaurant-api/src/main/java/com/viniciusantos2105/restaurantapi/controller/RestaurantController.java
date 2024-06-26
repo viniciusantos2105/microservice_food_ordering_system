@@ -2,6 +2,7 @@ package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
+import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
 import com.viniciusantos2105.restaurantapi.service.RestaurantService;
@@ -28,8 +29,14 @@ public class RestaurantController {
     @PostMapping
     public ResponseEntity<RestaurantResponseDto> createRestaurant(@RequestHeader("Authorization") String token, @RequestBody @Valid RestaurantRequestDto request) {
         User user = userService.getUser(token).block();
-        RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.createRestaurant(user, request), RestaurantResponseDto.class);
+        RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.createRestaurant(request, user), RestaurantResponseDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("/{restaurantId}")
+    public ResponseEntity<RestaurantResponseDto> updateRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @RequestBody @Valid RestaurantEditRequestDto request) {
+        User user = userService.getUser(token).block();
+        RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.updateRestaurant(restaurantId, request, user), RestaurantResponseDto.class);
+        return ResponseEntity.ok(response);
+    }
 }

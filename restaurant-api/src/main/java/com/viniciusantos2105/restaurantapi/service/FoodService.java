@@ -8,7 +8,7 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.FoodRepositoryImpl;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
-import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestEditDto;
+import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,7 @@ public class FoodService {
         return restaurant.getRestaurantMenu();
     }
 
-    public Food updateFood(Long restaurantId, Long foodId, FoodRequestEditDto request, User user) {
+    public Food updateFood(Long restaurantId, Long foodId, FoodEditRequestDto request, User user) {
         restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
         foodRepositoryImpl.validateFoodName(request.getFoodName(), restaurantId);
@@ -44,7 +44,7 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
-    private void update(Food food, FoodRequestEditDto request){
+    private void update(Food food, FoodEditRequestDto request){
         Food updatedFood = adapter.mapSourceToTarget(request, Food.class);
         adapter.updateTargetWithSource(updatedFood, food);
     }

@@ -13,16 +13,4 @@ public class UnauthorizedAcessException extends UnauthorizedException {
     public UnauthorizedAcessException(String message) {
         super(message);
     }
-
-    public static UnauthorizedAcessException create(String message, String details, Integer status) {
-        return new UnauthorizedAcessException(message, details, status);
-    }
-
-    public static UnauthorizedAcessException create(String message, String details) {
-        return new UnauthorizedAcessException(message, details);
-    }
-
-    public static UnauthorizedAcessException create(String message) {
-        return new UnauthorizedAcessException(message);
-    }
 }
