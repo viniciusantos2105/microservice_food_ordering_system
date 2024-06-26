@@ -5,6 +5,7 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepositor
 import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepositoryImpl;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
+import com.viniciusantos2105.restaurantapi.exception.unauthorized.UnauthorizedAcessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,7 @@ public class RestaurantService {
     public Restaurant findRestaurantWithUserValidation(Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
         if (!restaurant.getRestaurantOwner().getUserId().equals(user.getUserId())) {
-            //:TODO implementar exception personalizada
-            throw new RuntimeException();
+            throw UnauthorizedAcessException.create("Restaurante não encontrado", "restaurantId");
         }
         return restaurant;
     }
