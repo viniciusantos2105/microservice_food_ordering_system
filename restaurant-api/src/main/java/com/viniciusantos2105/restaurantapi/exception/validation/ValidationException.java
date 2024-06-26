@@ -20,5 +20,12 @@ public class ValidationException extends CustomException {
         this.status = 400;
     }
 
+    public static ValidationException create(String message, String details) {
+        return new ValidationException(message, details);
+    }
+
+    public static ValidationException create(String message) {
+        return new ValidationException(message);
+    }
 
 }
