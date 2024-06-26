@@ -19,6 +19,7 @@ public class FoodRepositoryImpl {
         query.setParameter("restaurantId", restaurantId);
 
 
-        if (!query.getResultList().isEmpty()) throw ResourceAlreadyExists.create("Já existe um prato com esse nome", "foodName");
+        if (!query.getResultList().isEmpty())
+            throw ResourceAlreadyExists.create("Já existe um prato com esse nome", "foodName");
     }
 }

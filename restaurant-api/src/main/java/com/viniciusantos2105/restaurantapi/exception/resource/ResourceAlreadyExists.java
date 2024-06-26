@@ -1,6 +1,6 @@
 package com.viniciusantos2105.restaurantapi.exception.resource;
 
-public class ResourceAlreadyExists  extends ResourceException{
+public class ResourceAlreadyExists extends ResourceException {
     public ResourceAlreadyExists(String message, String type, Integer status) {
         super(message, type, status);
     }

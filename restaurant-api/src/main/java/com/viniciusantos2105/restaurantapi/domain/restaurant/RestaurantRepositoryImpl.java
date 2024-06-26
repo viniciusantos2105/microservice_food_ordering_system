@@ -17,7 +17,8 @@ public class RestaurantRepositoryImpl {
         TypedQuery<Restaurant> query = entityManager.createQuery("SELECT r FROM Restaurant r WHERE r.restaurantName = :restaurantName", Restaurant.class);
         query.setParameter("restaurantName", restaurantName);
 
-        if (!query.getResultList().isEmpty()) throw ResourceAlreadyExists.create("Já existe um restaurante com esse nome", "restaurantName");
+        if (!query.getResultList().isEmpty())
+            throw ResourceAlreadyExists.create("Já existe um restaurante com esse nome", "restaurantName");
     }
 
     public Restaurant findRestaurantById(Long restaurantId) {
