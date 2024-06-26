@@ -50,8 +50,9 @@ public class FoodService {
     }
 
     public void deleteFood(Long restaurantId, Long foodId, User user) {
-        restaurantService.findRestaurantWithUserValidation(restaurantId, user);
+        Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
+        restaurantService.removeFood(restaurant, food);
         foodRepository.delete(food);
     }
 }

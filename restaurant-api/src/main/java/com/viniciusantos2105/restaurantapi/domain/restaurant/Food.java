@@ -17,7 +17,7 @@ public class Food {
     private String foodName;
     private String foodDescription;
     private Double foodPrice;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Restaurant restaurant;
 
     public static Food create(Restaurant restaurant, FoodRequestDto request) {

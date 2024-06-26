@@ -50,4 +50,11 @@ public class FoodController {
         FoodResponseDto response = adapter.mapSourceToTarget(foodService.updateFood(restaurantId, foodId, request, user), FoodResponseDto.class);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @DeleteMapping("/{restaurantId}/{foodId}")
+    public ResponseEntity<Void> deleteFood(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @PathVariable Long foodId) {
+        User user = userService.getUser(token).block();
+        foodService.deleteFood(restaurantId, foodId, user);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

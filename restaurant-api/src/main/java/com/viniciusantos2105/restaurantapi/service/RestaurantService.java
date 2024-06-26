@@ -1,5 +1,6 @@
 package com.viniciusantos2105.restaurantapi.service;
 
+import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepository;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepositoryImpl;
@@ -22,15 +23,16 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant findRestaurantById(Long restaurantId) {
-        return restaurantRepositoryImpl.findRestaurantById(restaurantId);
-    }
-
     public Restaurant findRestaurantWithUserValidation(Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
         if (!restaurant.getRestaurantOwner().getUserId().equals(user.getUserId())) {
-            throw UnauthorizedAcessException.create("Restaurante não encontrado", "restaurantId");
+            throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
         }
         return restaurant;
+    }
+
+    public void removeFood(Restaurant restaurant, Food food){
+        restaurant.getRestaurantMenu().remove(food);
+        restaurantRepository.save(restaurant);
     }
 }
