@@ -13,7 +13,7 @@ CREATE TABLE "order"
 CREATE TABLE order_food
 (
     order_food_id    UUID DEFAULT uuid_generate_v4() NOT NULL,
-    order_id         UUID NOT NULL,
+    order_id         UUID,
     food_name        VARCHAR(255),
     food_description VARCHAR(255),
     food_price       DOUBLE PRECISION,

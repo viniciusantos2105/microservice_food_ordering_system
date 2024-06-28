@@ -46,8 +46,8 @@ public class FoodService {
         return foodList;
     }
 
-    public List<Food> listFoodsByRestaurant(UUID restaurantId, User user) {
-        Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
+    public List<Food> listFoodsByRestaurant(UUID restaurantId) {
+        Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
         return restaurant.getRestaurantMenu();
     }
 

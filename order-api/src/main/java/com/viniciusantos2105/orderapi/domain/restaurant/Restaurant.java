@@ -13,5 +13,5 @@ public class Restaurant {
     private UUID restaurantId;
     private String restaurantName;
     private String restaurantAddress;
-
+    private UUID ownerId;
 }

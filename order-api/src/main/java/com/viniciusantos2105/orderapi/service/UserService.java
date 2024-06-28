@@ -32,4 +32,10 @@ public class UserService {
             throw UnauthorizedAcessException.create("Entre em uma conta de cliente para executar essa ação", "userId");
         }
     }
+
+    public void verifyOwnerUser(User user) {
+        if (user.getUserType().equals(UserType.CLIENT)) {
+            throw UnauthorizedAcessException.create("Entre em uma conta de proprietário para executar essa ação", "userId");
+        }
+    }
 }

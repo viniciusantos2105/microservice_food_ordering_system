@@ -35,6 +35,17 @@ public class RestaurantService {
         return restaurant;
     }
 
+    public Restaurant findRestaurantById(UUID restaurantId) {
+        return restaurantRepositoryImpl.findRestaurantById(restaurantId);
+    }
+
+    public void validateRestaurantOwner(UUID restaurantId, UUID ownerId) {
+        Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
+        if(!restaurant.getOwnerId().equals(ownerId)) {
+            throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
+        }
+    }
+
     public Restaurant createRestaurant(RestaurantRequestDto request, User user) {
         restaurantRepositoryImpl.validateRestaurantName(request.getRestaurantName());
         Restaurant restaurant = Restaurant.create(user, request);

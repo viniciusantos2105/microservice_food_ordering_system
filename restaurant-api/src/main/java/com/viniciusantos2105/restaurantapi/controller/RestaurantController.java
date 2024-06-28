@@ -38,9 +38,18 @@ public class RestaurantController {
         return ResponseEntity.status(HttpStatus.OK).body(responseList);
     }
 
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<RestaurantResponseDto> getRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId) {
+        User user = userService.getUser(token).block();
+        userService.validateOwnerUser(user);
+        restaurantService.validateRestaurantOwner(restaurantId, user.getUserId());
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping
     public ResponseEntity<RestaurantResponseDto> createRestaurant(@RequestHeader("Authorization") String token, @RequestBody @Valid RestaurantRequestDto request) {
         User user = userService.getUser(token).block();
+        userService.validateOwnerUser(user);
         RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.createRestaurant(request, user), RestaurantResponseDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

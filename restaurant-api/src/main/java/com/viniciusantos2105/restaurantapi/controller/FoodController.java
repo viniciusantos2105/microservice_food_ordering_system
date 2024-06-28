@@ -34,8 +34,8 @@ public class FoodController {
     }
 
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId) {
-        List<Food> foods = foodService.listFoodsByRestaurant(restaurantId, userService.getUser(token).block());
+    public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant( @PathVariable UUID restaurantId) {
+        List<Food> foods = foodService.listFoodsByRestaurant(restaurantId);
         List<FoodResponseListDto> response = foods.stream().toList().stream().map(food -> adapter.mapSourceToTarget(food, FoodResponseListDto.class)).toList();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

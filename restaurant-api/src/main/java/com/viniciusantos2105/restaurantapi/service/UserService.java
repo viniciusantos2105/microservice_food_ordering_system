@@ -1,6 +1,8 @@
 package com.viniciusantos2105.restaurantapi.service;
 
 import com.viniciusantos2105.restaurantapi.domain.user.User;
+import com.viniciusantos2105.restaurantapi.domain.user.UserType;
+import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,9 @@ public class UserService {
                 .bodyToMono(User.class);
     }
 
-
+    public void validateOwnerUser(User user) {
+        if (user.getUserType() != UserType.OWNER) {
+            throw InvalidArgumentsException.create("Tipo de usuario invalido, crie um usuario do tipo OWNER");
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.viniciusantos2105.orderapi.dto;
+package com.viniciusantos2105.orderapi.dto.request;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;

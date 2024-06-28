@@ -21,7 +21,7 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<?> validationException(ValidationException exception) {
-        return ResponseEntity.status(exception.status).body(exception.getMessage());
+        return ResponseEntity.status(exception.status).body(ExceptionAdapter.toJson(exception));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -1,6 +1,8 @@
 package com.viniciusantos2105.orderapi.domain.order;
 
 import com.viniciusantos2105.orderapi.domain.user.User;
+import com.viniciusantos2105.orderapi.event.EventListener;
+import com.viniciusantos2105.orderapi.event.EventManager;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,13 +29,28 @@ public class Order {
     private Double orderTotalPrice;
     private OrderStatus orderStatus;
 
+    @Transient
+    private EventManager eventManager = new EventManager();
+
     public static Order create(User user, List<OrderFood> foods) {
         Order order = new Order();
         order.setOrderUser(user.getUserId());
         order.setOrderRestaurant(foods.get(0).getRestaurantId());
         order.setOrderFoods(foods);
         order.setOrderTotalPrice(foods.stream().mapToDouble(OrderFood::getFoodPrice).sum());
-        order.setOrderStatus(OrderStatus.PENDING);
         return order;
+    }
+
+    public void addListener(EventListener listener) {
+        eventManager.subscribe(listener);
+    }
+
+    public void removeListener(EventListener listener) {
+        eventManager.unsubscribe(listener);
+    }
+
+    public void setOrderStatus(Order order, OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+        eventManager.notify(order, orderStatus);
     }
 }
