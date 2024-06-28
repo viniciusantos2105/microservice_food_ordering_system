@@ -1,7 +1,7 @@
 package com.viniciusantos2105.orderapi.controller;
 
 import com.viniciusantos2105.orderapi.adapter.Adapter;
-import com.viniciusantos2105.orderapi.domain.order.User;
+import com.viniciusantos2105.orderapi.domain.user.User;
 import com.viniciusantos2105.orderapi.dto.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.OrderResponseDto;
 import com.viniciusantos2105.orderapi.service.OrderService;

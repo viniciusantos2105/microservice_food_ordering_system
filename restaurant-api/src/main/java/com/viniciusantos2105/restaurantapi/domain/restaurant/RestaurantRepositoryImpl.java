@@ -7,6 +7,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 public class RestaurantRepositoryImpl {
 
@@ -21,7 +23,7 @@ public class RestaurantRepositoryImpl {
             throw ResourceAlreadyExists.create("Já existe um restaurante com esse nome", "restaurantName");
     }
 
-    public Restaurant findRestaurantById(Long restaurantId) {
+    public Restaurant findRestaurantById(UUID restaurantId) {
         TypedQuery<Restaurant> query = entityManager.createQuery("SELECT r FROM Restaurant r WHERE r.restaurantId = :restaurantId", Restaurant.class);
         query.setParameter("restaurantId", restaurantId);
 

@@ -1,4 +1,4 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

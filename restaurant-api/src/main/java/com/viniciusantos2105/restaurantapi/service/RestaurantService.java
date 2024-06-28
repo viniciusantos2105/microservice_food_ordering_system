@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +27,9 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public Restaurant findRestaurantWithUserValidation(Long restaurantId, User user) {
+    public Restaurant findRestaurantWithUserValidation(UUID restaurantId, User user) {
         Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
-        if (!restaurant.getRestaurantOwner().getUserId().equals(user.getUserId())) {
+        if (!restaurant.getOwnerId().equals(user.getUserId())) {
             throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
         }
         return restaurant;
@@ -40,7 +41,7 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Long restaurantId, RestaurantEditRequestDto request, User user) {
+    public Restaurant updateRestaurant(UUID restaurantId, RestaurantEditRequestDto request, User user) {
         Restaurant restaurant = findRestaurantWithUserValidation(restaurantId, user);
         update(restaurant, request);
         return restaurantRepository.save(restaurant);
@@ -51,7 +52,7 @@ public class RestaurantService {
         adapter.updateTargetWithSource(updatedRestaurant, restaurant);
     }
 
-    public void deleteRestaurant(Long restaurantId, User user) {
+    public void deleteRestaurant(UUID restaurantId, User user) {
         Restaurant restaurant = findRestaurantWithUserValidation(restaurantId, user);
         restaurantRepository.delete(restaurant);
     }

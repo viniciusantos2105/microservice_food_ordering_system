@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/restaurant")
@@ -45,14 +46,14 @@ public class RestaurantController {
     }
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<RestaurantResponseDto> updateRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @RequestBody @Valid RestaurantEditRequestDto request) {
+    public ResponseEntity<RestaurantResponseDto> updateRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId, @RequestBody @Valid RestaurantEditRequestDto request) {
         User user = userService.getUser(token).block();
         RestaurantResponseDto response = adapter.mapSourceToTarget(restaurantService.updateRestaurant(restaurantId, request, user), RestaurantResponseDto.class);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{restaurantId}")
-    public ResponseEntity<Void> deleteRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId) {
+    public ResponseEntity<Void> deleteRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId) {
         User user = userService.getUser(token).block();
         restaurantService.deleteRestaurant(restaurantId, user);
         return ResponseEntity.noContent().build();

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Entity
@@ -13,11 +15,15 @@ public class Food {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long foodId;
+    private UUID foodId;
+    @Column(name = "food_name")
     private String foodName;
+    @Column(name = "food_description")
     private String foodDescription;
+    @Column(name = "food_price")
     private Double foodPrice;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     public static Food create(Restaurant restaurant, FoodRequestDto request) {

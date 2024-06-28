@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,7 @@ public class FoodService {
     private final FoodRepository foodRepository;
     private final FoodRepositoryImpl foodRepositoryImpl;
 
-    public Food createFood(Long restaurantId, FoodRequestDto request, User user) {
+    public Food createFood(UUID restaurantId, FoodRequestDto request, User user) {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         foodRepositoryImpl.validateFoodName(request.getFoodName(), restaurantId);
         Food food = Food.create(restaurant, request);
@@ -37,7 +38,7 @@ public class FoodService {
         List<Food> foodList = request.getFoodsSelecteds().stream()
                 .map(foodRepositoryImpl::findFoodById)
                 .toList();
-        Long restaurantId = foodList.get(0).getRestaurant().getRestaurantId();
+        UUID restaurantId = foodList.get(0).getRestaurant().getRestaurantId();
         if (foodList.stream().anyMatch(food -> !food.getRestaurant().getRestaurantId().equals(restaurantId))) {
             throw InvalidArgumentsException.create("Os alimentos selecionados pertencem a restaurantes diferentes");
         }
@@ -45,12 +46,12 @@ public class FoodService {
         return foodList;
     }
 
-    public List<Food> listFoodsByRestaurant(Long restaurantId, User user) {
+    public List<Food> listFoodsByRestaurant(UUID restaurantId, User user) {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         return restaurant.getRestaurantMenu();
     }
 
-    public Food updateFood(Long restaurantId, Long foodId, FoodEditRequestDto request, User user) {
+    public Food updateFood(UUID restaurantId, UUID foodId, FoodEditRequestDto request, User user) {
         restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         foodRepositoryImpl.validateFoodName(request.getFoodName(), restaurantId);
         Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
@@ -63,7 +64,7 @@ public class FoodService {
         adapter.updateTargetWithSource(updatedFood, food);
     }
 
-    public void deleteFood(Long restaurantId, Long foodId, User user) {
+    public void deleteFood(UUID restaurantId, UUID foodId, User user) {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         Food food = foodRepositoryImpl.findFoodByIdAndRestaurant(restaurantId, foodId);
         restaurantService.removeFood(restaurant, food);

@@ -1,14 +1,15 @@
 package com.viniciusantos2105.orderapi.service;
 
+import com.viniciusantos2105.orderapi.adapter.Adapter;
 import com.viniciusantos2105.orderapi.domain.order.Order;
+import com.viniciusantos2105.orderapi.domain.order.OrderFood;
 import com.viniciusantos2105.orderapi.domain.order.OrderRepository;
 import com.viniciusantos2105.orderapi.domain.order.OrderRepositoryImpl;
-import com.viniciusantos2105.orderapi.domain.order.User;
+import com.viniciusantos2105.orderapi.domain.user.User;
 import com.viniciusantos2105.orderapi.domain.restaurant.Food;
 import com.viniciusantos2105.orderapi.dto.FoodsListRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -22,7 +23,10 @@ public class OrderService {
 
     public Order createOrder(FoodsListRequestDto request, User user) {
         List<Food> foodList = restaurantService.getFoods(request);
-        Order order = Order.create(user, foodList);
+        List<OrderFood> foods = foodList.stream()
+                .map(OrderFood::create)
+                .toList();
+        Order order = Order.create(user, foods);
         return orderRepository.save(order);
     }
 

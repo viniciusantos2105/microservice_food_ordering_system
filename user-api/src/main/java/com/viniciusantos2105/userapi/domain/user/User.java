@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private UUID userId;
     @Column(name = "user_name")
     private String userFullName;
     @Column(name = "user_email", unique = true)
@@ -32,7 +33,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long userId, String userFullName, String userEmail, String userPassword, UserType userType) {
+    public User(UUID userId, String userFullName, String userEmail, String userPassword, UserType userType) {
         this.userId = userId;
         this.userFullName = userFullName;
         this.userEmail = userEmail;

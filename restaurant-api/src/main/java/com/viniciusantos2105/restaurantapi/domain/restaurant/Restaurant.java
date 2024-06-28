@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,10 +18,9 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long restaurantId;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "restaurant_owner")
-    private User restaurantOwner;
+    private UUID restaurantId;
+    @JoinColumn(name = "owner_id")
+    private UUID ownerId;
     @Column(name = "restaurant_name", unique = true)
     private String restaurantName;
     @Column(name = "restaurant_address")
@@ -34,7 +34,7 @@ public class Restaurant {
 
     public static Restaurant create(User user, RestaurantRequestDto request) {
         Restaurant restaurant = new Restaurant();
-        restaurant.setRestaurantOwner(user);
+        restaurant.setOwnerId(user.getUserId());
         restaurant.setRestaurantName(request.getRestaurantName());
         restaurant.setRestaurantAddress(request.getRestaurantAddress());
         restaurant.setRestaurantMenu(new ArrayList<>());

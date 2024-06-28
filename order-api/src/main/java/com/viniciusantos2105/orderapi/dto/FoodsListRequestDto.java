@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @Value
 @Getter
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FoodsListRequestDto implements Serializable {
     @NotEmpty(message = "Lista de pratos não pode ser vazia")
-    List<Long> foodsSelecteds;
+    List<UUID> foodsSelecteds;
 
 
 }

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/restaurant/food")
@@ -33,7 +34,7 @@ public class FoodController {
     }
 
     @GetMapping("/{restaurantId}")
-    public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId) {
+    public ResponseEntity<List<FoodResponseListDto>> listFoodsByRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId) {
         List<Food> foods = foodService.listFoodsByRestaurant(restaurantId, userService.getUser(token).block());
         List<FoodResponseListDto> response = foods.stream().toList().stream().map(food -> adapter.mapSourceToTarget(food, FoodResponseListDto.class)).toList();
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -47,21 +48,21 @@ public class FoodController {
     }
 
     @PostMapping("/{restaurantId}")
-    public ResponseEntity<FoodResponseDto> createFood(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @RequestBody @Valid FoodRequestDto request) {
+    public ResponseEntity<FoodResponseDto> createFood(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId, @RequestBody @Valid FoodRequestDto request) {
         User user = userService.getUser(token).block();
         FoodResponseDto response = adapter.mapSourceToTarget(foodService.createFood(restaurantId, request, user), FoodResponseDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{restaurantId}/{foodId}")
-    public ResponseEntity<FoodResponseDto> updateFood(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @PathVariable Long foodId, @RequestBody @Valid FoodEditRequestDto request) {
+    public ResponseEntity<FoodResponseDto> updateFood(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId, @PathVariable UUID foodId, @RequestBody @Valid FoodEditRequestDto request) {
         User user = userService.getUser(token).block();
         FoodResponseDto response = adapter.mapSourceToTarget(foodService.updateFood(restaurantId, foodId, request, user), FoodResponseDto.class);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{restaurantId}/{foodId}")
-    public ResponseEntity<Void> deleteFood(@RequestHeader("Authorization") String token, @PathVariable Long restaurantId, @PathVariable Long foodId) {
+    public ResponseEntity<Void> deleteFood(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId, @PathVariable UUID foodId) {
         User user = userService.getUser(token).block();
         foodService.deleteFood(restaurantId, foodId, user);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

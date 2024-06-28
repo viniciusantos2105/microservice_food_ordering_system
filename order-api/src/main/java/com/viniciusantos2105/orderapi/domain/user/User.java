@@ -1,33 +1,24 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
-@Entity
-@Table(name = "user")
 public class User {
 
-    @Id
-    private Long userId;
-    @Column(name = "user_name")
+    private UUID userId;
     private String userFullName;
-    @Column(name = "user_email", unique = true)
     private String userEmail;
-    @Column(name = "user_password")
     private String userPassword;
-    @Column(name = "user_type")
     private UserType userType;
 
     public User() {
     }
 
-    public User(Long userId, String userFullName, String userEmail, String userPassword, UserType userType) {
+    public User(UUID userId, String userFullName, String userEmail, String userPassword, UserType userType) {
         this.userId = userId;
         this.userFullName = userFullName;
         this.userEmail = userEmail;

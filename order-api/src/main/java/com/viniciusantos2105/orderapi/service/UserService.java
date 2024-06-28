@@ -1,7 +1,7 @@
 package com.viniciusantos2105.orderapi.service;
 
-import com.viniciusantos2105.orderapi.domain.order.User;
-import com.viniciusantos2105.orderapi.domain.order.UserType;
+import com.viniciusantos2105.orderapi.domain.user.User;
+import com.viniciusantos2105.orderapi.domain.user.UserType;
 import com.viniciusantos2105.orderapi.exception.unauthorized.UnauthorizedAcessException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

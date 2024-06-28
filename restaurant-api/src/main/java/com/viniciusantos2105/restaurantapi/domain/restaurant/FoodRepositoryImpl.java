@@ -7,13 +7,15 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 public class FoodRepositoryImpl {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void validateFoodName(String foodName, Long restaurantId) {
+    public void validateFoodName(String foodName, UUID restaurantId) {
         TypedQuery<Food> query = entityManager.createQuery("SELECT f FROM Food f WHERE f.foodName = :foodName " +
                 "AND f.restaurant.restaurantId = :restaurantId ", Food.class);
         query.setParameter("foodName", foodName);
@@ -24,7 +26,7 @@ public class FoodRepositoryImpl {
             throw ResourceAlreadyExists.create("Já existe um prato com esse nome", "foodName");
     }
 
-    public Food findFoodByIdAndRestaurant(Long restaurantId, Long foodId) {
+    public Food findFoodByIdAndRestaurant(UUID restaurantId, UUID foodId) {
         TypedQuery<Food> query = entityManager.createQuery("SELECT f FROM Food f WHERE f.foodId = :foodId " +
                 "AND f.restaurant.restaurantId = :restaurantId ", Food.class);
         query.setParameter("foodId", foodId);
@@ -37,7 +39,7 @@ public class FoodRepositoryImpl {
         return query.getSingleResult();
     }
 
-    public Food findFoodById(Long fooId){
+    public Food findFoodById(UUID fooId){
         TypedQuery<Food> query = entityManager.createQuery("SELECT f FROM Food f WHERE f.foodId = :foodId", Food.class);
         query.setParameter("foodId", fooId);
 
