@@ -1,6 +1,6 @@
-package com.viniciusantos2105.orderapi.service;
+package com.viniciusantos2105.orderapi.domain.restaurant.service;
 
-import com.viniciusantos2105.orderapi.domain.restaurant.Food;
+import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;

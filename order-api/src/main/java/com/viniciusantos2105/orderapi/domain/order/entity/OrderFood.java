@@ -1,6 +1,6 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.order.entity;
 
-import com.viniciusantos2105.orderapi.domain.restaurant.Food;
+import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

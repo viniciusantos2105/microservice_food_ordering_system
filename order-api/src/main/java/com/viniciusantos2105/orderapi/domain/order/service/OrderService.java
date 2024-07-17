@@ -1,12 +1,18 @@
-package com.viniciusantos2105.orderapi.service;
+package com.viniciusantos2105.orderapi.domain.order.service;
 
-import com.viniciusantos2105.orderapi.domain.order.*;
-import com.viniciusantos2105.orderapi.domain.user.User;
-import com.viniciusantos2105.orderapi.domain.restaurant.Food;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderStatus;
+import com.viniciusantos2105.orderapi.domain.order.repository.OrderHistoryRepository;
+import com.viniciusantos2105.orderapi.domain.order.entity.Order;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderFood;
+import com.viniciusantos2105.orderapi.domain.order.repository.OrderRepository;
+import com.viniciusantos2105.orderapi.domain.user.entity.User;
+import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
 import com.viniciusantos2105.orderapi.event.OrderStatusListener;
 import com.viniciusantos2105.orderapi.exception.unauthorized.UnauthorizedAcessException;
+import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.viniciusantos2105.orderapi.domain.user;
+package com.viniciusantos2105.orderapi.domain.user.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.order.entity;
 
-import com.viniciusantos2105.orderapi.domain.user.User;
+import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.event.EventListener;
 import com.viniciusantos2105.orderapi.event.EventManager;
 import jakarta.persistence.*;

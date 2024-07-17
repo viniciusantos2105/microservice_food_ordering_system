@@ -1,4 +1,4 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.order.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

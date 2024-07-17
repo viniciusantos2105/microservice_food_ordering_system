@@ -1,8 +1,5 @@
 package com.viniciusantos2105.orderapi.config;
 
-import com.viniciusantos2105.orderapi.domain.order.Order;
-import com.viniciusantos2105.orderapi.domain.order.OrderHistory;
-import com.viniciusantos2105.orderapi.dto.response.OrderHistoryResponseDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

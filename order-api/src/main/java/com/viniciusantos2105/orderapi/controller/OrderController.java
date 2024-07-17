@@ -1,14 +1,14 @@
 package com.viniciusantos2105.orderapi.controller;
 
 import com.viniciusantos2105.orderapi.adapter.Adapter;
-import com.viniciusantos2105.orderapi.domain.order.OrderHistory;
-import com.viniciusantos2105.orderapi.domain.user.User;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
+import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
 import com.viniciusantos2105.orderapi.dto.response.*;
-import com.viniciusantos2105.orderapi.service.OrderService;
-import com.viniciusantos2105.orderapi.service.RestaurantService;
-import com.viniciusantos2105.orderapi.service.UserService;
+import com.viniciusantos2105.orderapi.domain.order.service.OrderService;
+import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
+import com.viniciusantos2105.orderapi.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

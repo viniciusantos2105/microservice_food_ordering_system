@@ -1,6 +1,5 @@
-package com.viniciusantos2105.orderapi.domain.restaurant;
+package com.viniciusantos2105.orderapi.domain.restaurant.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

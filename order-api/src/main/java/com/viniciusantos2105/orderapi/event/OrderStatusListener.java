@@ -1,9 +1,9 @@
 package com.viniciusantos2105.orderapi.event;
 
-import com.viniciusantos2105.orderapi.domain.order.Order;
-import com.viniciusantos2105.orderapi.domain.order.OrderHistory;
-import com.viniciusantos2105.orderapi.domain.order.OrderHistoryRepository;
-import com.viniciusantos2105.orderapi.domain.order.OrderStatus;
+import com.viniciusantos2105.orderapi.domain.order.entity.Order;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
+import com.viniciusantos2105.orderapi.domain.order.repository.OrderHistoryRepository;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

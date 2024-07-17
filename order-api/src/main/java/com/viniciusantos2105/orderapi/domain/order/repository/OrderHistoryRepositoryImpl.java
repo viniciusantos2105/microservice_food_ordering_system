@@ -1,5 +1,6 @@
-package com.viniciusantos2105.orderapi.domain.order;
+package com.viniciusantos2105.orderapi.domain.order.repository;
 
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;

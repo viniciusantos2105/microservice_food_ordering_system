@@ -1,6 +1,6 @@
 package com.viniciusantos2105.orderapi.dto.response;
 
-import com.viniciusantos2105.orderapi.domain.order.OrderStatus;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
