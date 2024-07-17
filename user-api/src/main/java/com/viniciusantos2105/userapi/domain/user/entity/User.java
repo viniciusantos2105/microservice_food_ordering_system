@@ -1,4 +1,4 @@
-package com.viniciusantos2105.userapi.domain.user;
+package com.viniciusantos2105.userapi.domain.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

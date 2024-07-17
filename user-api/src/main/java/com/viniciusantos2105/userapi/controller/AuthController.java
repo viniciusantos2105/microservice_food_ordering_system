@@ -2,7 +2,7 @@ package com.viniciusantos2105.userapi.controller;
 
 import com.viniciusantos2105.userapi.dto.LoginRequestDto;
 import com.viniciusantos2105.userapi.dto.LoginResponseDto;
-import com.viniciusantos2105.userapi.service.AuthService;
+import com.viniciusantos2105.userapi.domain.auth.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

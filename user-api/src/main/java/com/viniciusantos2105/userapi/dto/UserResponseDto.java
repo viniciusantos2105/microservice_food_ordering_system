@@ -1,11 +1,12 @@
 package com.viniciusantos2105.userapi.dto;
 
-import com.viniciusantos2105.userapi.domain.user.UserType;
+import com.viniciusantos2105.userapi.domain.user.entity.UserType;
+import com.viniciusantos2105.userapi.domain.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * DTO for {@link com.viniciusantos2105.userapi.domain.user.User}
+ * DTO for {@link User}
  */
 @Getter
 @Setter

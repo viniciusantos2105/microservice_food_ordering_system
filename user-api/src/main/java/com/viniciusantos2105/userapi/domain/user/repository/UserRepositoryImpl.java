@@ -1,5 +1,6 @@
-package com.viniciusantos2105.userapi.domain.user;
+package com.viniciusantos2105.userapi.domain.user.repository;
 
+import com.viniciusantos2105.userapi.domain.user.entity.User;
 import com.viniciusantos2105.userapi.exception.resource.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

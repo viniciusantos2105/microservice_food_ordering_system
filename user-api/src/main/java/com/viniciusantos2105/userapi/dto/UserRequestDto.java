@@ -1,6 +1,6 @@
 package com.viniciusantos2105.userapi.dto;
 
-import com.viniciusantos2105.userapi.domain.user.User;
+import com.viniciusantos2105.userapi.domain.user.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

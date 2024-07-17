@@ -1,8 +1,7 @@
-package com.viniciusantos2105.userapi.service;
+package com.viniciusantos2105.userapi.domain.auth.service;
 
 import com.viniciusantos2105.userapi.config.security.TokenService;
-import com.viniciusantos2105.userapi.domain.user.UserRepository;
-import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
+import com.viniciusantos2105.userapi.domain.user.repository.UserRepository;
 import com.viniciusantos2105.userapi.dto.LoginRequestDto;
 import com.viniciusantos2105.userapi.dto.LoginResponseDto;
 import com.viniciusantos2105.userapi.exception.resource.ResourceNotFoundException;

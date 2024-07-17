@@ -1,4 +1,4 @@
-package com.viniciusantos2105.userapi.domain.user;
+package com.viniciusantos2105.userapi.domain.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

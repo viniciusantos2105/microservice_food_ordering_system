@@ -1,10 +1,10 @@
 package com.viniciusantos2105.userapi.controller;
 
 import com.viniciusantos2105.userapi.adapter.Adapter;
-import com.viniciusantos2105.userapi.domain.user.User;
+import com.viniciusantos2105.userapi.domain.user.entity.User;
 import com.viniciusantos2105.userapi.dto.UserRequestDto;
 import com.viniciusantos2105.userapi.dto.UserResponseDto;
-import com.viniciusantos2105.userapi.service.UserService;
+import com.viniciusantos2105.userapi.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

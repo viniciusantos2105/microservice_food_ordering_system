@@ -1,9 +1,8 @@
-package com.viniciusantos2105.userapi.service;
+package com.viniciusantos2105.userapi.domain.user.service;
 
 import com.viniciusantos2105.userapi.config.security.TokenService;
-import com.viniciusantos2105.userapi.domain.user.User;
-import com.viniciusantos2105.userapi.domain.user.UserRepository;
-import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
+import com.viniciusantos2105.userapi.domain.user.entity.User;
+import com.viniciusantos2105.userapi.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.viniciusantos2105.userapi.config.security;
 
-import com.viniciusantos2105.userapi.domain.user.User;
-import com.viniciusantos2105.userapi.domain.user.UserRepositoryImpl;
+import com.viniciusantos2105.userapi.domain.user.entity.User;
+import com.viniciusantos2105.userapi.domain.user.repository.UserRepositoryImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
