@@ -1,5 +1,6 @@
-package com.viniciusantos2105.restaurantapi.domain.food;
+package com.viniciusantos2105.restaurantapi.domain.food.repository;
 
+import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
 import com.viniciusantos2105.restaurantapi.exception.resource.ResourceAlreadyExists;
 import com.viniciusantos2105.restaurantapi.exception.resource.ResourceNotFoundException;
 import jakarta.persistence.EntityManager;

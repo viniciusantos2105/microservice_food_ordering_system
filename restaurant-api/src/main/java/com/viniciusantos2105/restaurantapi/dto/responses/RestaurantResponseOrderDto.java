@@ -1,6 +1,6 @@
 package com.viniciusantos2105.restaurantapi.dto.responses;
 
-import com.viniciusantos2105.restaurantapi.domain.user.User;
+import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 

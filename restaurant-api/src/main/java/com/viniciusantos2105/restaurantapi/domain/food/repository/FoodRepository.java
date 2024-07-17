@@ -1,5 +1,6 @@
-package com.viniciusantos2105.restaurantapi.domain.food;
+package com.viniciusantos2105.restaurantapi.domain.food.repository;
 
+import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

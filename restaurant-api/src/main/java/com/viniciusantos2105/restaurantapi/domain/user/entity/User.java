@@ -1,4 +1,4 @@
-package com.viniciusantos2105.restaurantapi.domain.user;
+package com.viniciusantos2105.restaurantapi.domain.user.entity;
 
 import lombok.Getter;
 import lombok.Setter;

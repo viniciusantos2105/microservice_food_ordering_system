@@ -1,10 +1,10 @@
-package com.viniciusantos2105.restaurantapi.service;
+package com.viniciusantos2105.restaurantapi.domain.restaurant.service;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
-import com.viniciusantos2105.restaurantapi.domain.food.Food;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepository;
-import com.viniciusantos2105.restaurantapi.domain.user.User;
+import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.repository.RestaurantRepository;
+import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import com.viniciusantos2105.restaurantapi.exception.unauthorized.UnauthorizedAcessException;

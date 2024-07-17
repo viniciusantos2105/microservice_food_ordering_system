@@ -1,7 +1,7 @@
-package com.viniciusantos2105.restaurantapi.service;
+package com.viniciusantos2105.restaurantapi.domain.user.service;
 
-import com.viniciusantos2105.restaurantapi.domain.user.User;
-import com.viniciusantos2105.restaurantapi.domain.user.UserType;
+import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
+import com.viniciusantos2105.restaurantapi.domain.user.entity.UserType;
 import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

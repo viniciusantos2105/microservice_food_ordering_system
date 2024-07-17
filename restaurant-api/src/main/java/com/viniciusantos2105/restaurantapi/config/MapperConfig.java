@@ -1,7 +1,7 @@
 package com.viniciusantos2105.restaurantapi.config;
 
-import com.viniciusantos2105.restaurantapi.domain.food.Food;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
+import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
 import com.viniciusantos2105.restaurantapi.dto.responses.FoodResponseOrderDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
 import org.modelmapper.ModelMapper;

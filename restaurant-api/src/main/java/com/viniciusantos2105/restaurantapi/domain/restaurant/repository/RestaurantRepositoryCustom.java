@@ -1,4 +1,6 @@
-package com.viniciusantos2105.restaurantapi.domain.restaurant;
+package com.viniciusantos2105.restaurantapi.domain.restaurant.repository;
+
+import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
 
 import java.util.UUID;
 
