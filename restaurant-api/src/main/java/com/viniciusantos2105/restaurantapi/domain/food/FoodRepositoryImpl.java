@@ -1,4 +1,4 @@
-package com.viniciusantos2105.restaurantapi.domain.restaurant;
+package com.viniciusantos2105.restaurantapi.domain.food;
 
 import com.viniciusantos2105.restaurantapi.exception.resource.ResourceAlreadyExists;
 import com.viniciusantos2105.restaurantapi.exception.resource.ResourceNotFoundException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public class FoodRepositoryImpl {
+public class FoodRepositoryImpl implements FoodRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;

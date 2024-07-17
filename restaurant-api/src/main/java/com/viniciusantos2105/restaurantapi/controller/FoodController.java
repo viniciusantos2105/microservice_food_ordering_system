@@ -1,7 +1,7 @@
 package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
+import com.viniciusantos2105.restaurantapi.domain.food.Food;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;

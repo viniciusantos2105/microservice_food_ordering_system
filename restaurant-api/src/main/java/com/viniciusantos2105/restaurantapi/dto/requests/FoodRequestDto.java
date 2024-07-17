@@ -1,6 +1,6 @@
 package com.viniciusantos2105.restaurantapi.dto.requests;
 
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
+import com.viniciusantos2105.restaurantapi.domain.food.Food;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

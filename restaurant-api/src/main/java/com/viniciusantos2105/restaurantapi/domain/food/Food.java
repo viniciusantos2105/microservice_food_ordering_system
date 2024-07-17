@@ -1,5 +1,6 @@
-package com.viniciusantos2105.restaurantapi.domain.restaurant;
+package com.viniciusantos2105.restaurantapi.domain.food;
 
+import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
