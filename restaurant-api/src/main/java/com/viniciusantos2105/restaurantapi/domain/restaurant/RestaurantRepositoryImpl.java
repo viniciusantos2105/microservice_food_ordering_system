@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public class RestaurantRepositoryImpl {
+public class RestaurantRepositoryImpl implements RestaurantRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;

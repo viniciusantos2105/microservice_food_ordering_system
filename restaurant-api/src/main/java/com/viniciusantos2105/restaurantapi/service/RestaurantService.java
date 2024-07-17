@@ -1,10 +1,9 @@
 package com.viniciusantos2105.restaurantapi.service;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.Food;
+import com.viniciusantos2105.restaurantapi.domain.food.Food;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepository;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.RestaurantRepositoryImpl;
 import com.viniciusantos2105.restaurantapi.domain.user.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
@@ -21,14 +20,13 @@ public class RestaurantService {
 
     private final Adapter adapter;
     private final RestaurantRepository restaurantRepository;
-    private final RestaurantRepositoryImpl restaurantRepositoryImpl;
 
     public List<Restaurant> listRestaurants() {
         return restaurantRepository.findAll();
     }
 
     public Restaurant findRestaurantWithUserValidation(UUID restaurantId, User user) {
-        Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
+        Restaurant restaurant = restaurantRepository.findRestaurantById(restaurantId);
         if (!restaurant.getOwnerId().equals(user.getUserId())) {
             throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
         }
@@ -36,18 +34,18 @@ public class RestaurantService {
     }
 
     public Restaurant findRestaurantById(UUID restaurantId) {
-        return restaurantRepositoryImpl.findRestaurantById(restaurantId);
+        return restaurantRepository.findRestaurantById(restaurantId);
     }
 
     public void validateRestaurantOwner(UUID restaurantId, UUID ownerId) {
-        Restaurant restaurant = restaurantRepositoryImpl.findRestaurantById(restaurantId);
+        Restaurant restaurant = restaurantRepository.findRestaurantById(restaurantId);
         if(!restaurant.getOwnerId().equals(ownerId)) {
             throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
         }
     }
 
     public Restaurant createRestaurant(RestaurantRequestDto request, User user) {
-        restaurantRepositoryImpl.validateRestaurantName(request.getRestaurantName());
+        restaurantRepository.validateRestaurantName(request.getRestaurantName());
         Restaurant restaurant = Restaurant.create(user, request);
         return restaurantRepository.save(restaurant);
     }
