@@ -8,11 +8,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserRepositoryImpl {
+public class UserRepositoryImpl implements UserRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     public void validateUserEmail(String userEmail) {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);
         query.setParameter("userEmail", userEmail);
@@ -20,6 +21,7 @@ public class UserRepositoryImpl {
         if (!query.getResultList().isEmpty()) throw new RuntimeException("Email já cadastrado");
     }
 
+    @Override
     @Transactional
     public User findUserByEmail(String userEmail) {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userEmail = :userEmail", User.class);

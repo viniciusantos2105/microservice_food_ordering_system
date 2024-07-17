@@ -15,10 +15,9 @@ public class UserService {
     private final PasswordEncoder encoder;
     private final TokenService tokenService;
     private final UserRepository userRepository;
-    private final UserRepositoryImpl userRepositoryImpl;
 
     public User createUser(User user) {
-        userRepositoryImpl.validateUserEmail(user.getUserEmail());
+        userRepository.validateUserEmail(user.getUserEmail());
         user.setUserPassword(encoder.encode(user.getUserPassword()));
         return userRepository.save(user);
     }
@@ -26,7 +25,7 @@ public class UserService {
     public User getUser(String token) {
         token = token.replace("Bearer ", "");
         var email = tokenService.validarToken(token);
-        return userRepositoryImpl.findUserByEmail(email);
+        return userRepository.findUserByEmail(email);
     }
 
 }
