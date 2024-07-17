@@ -21,8 +21,7 @@ public class OrderService {
     private final OrderStatusListener orderStatusListener;
     private final RestaurantService restaurantService;
     private final OrderRepository orderRepository;
-    private final OrderRepositoryImpl orderRepositoryImpl;
-    private final OrderHistoryRepositoryImpl orderHistoryRepositoryImpl;
+    private final OrderHistoryRepository orderHistoryRepository;
 
     public Order createOrder(FoodsListRequestDto request, User user) {
         List<Food> foodList = restaurantService.getFoods(request);
@@ -43,7 +42,7 @@ public class OrderService {
     }
 
     public Order updateOrderStatus(UUID orderId, OrderStatusRequestDto request, String token){
-        Order order = orderRepositoryImpl.findOrderById(orderId);
+        Order order = orderRepository.findOrderById(orderId);
         restaurantService.isUserRestaurantOwner(token, order.getOrderRestaurant());
         order.addListener(orderStatusListener);
 
@@ -53,17 +52,17 @@ public class OrderService {
     }
 
     public Order findOrderById(UUID orderId, User user) {
-        Order order = orderRepositoryImpl.findOrderById(orderId);
+        Order order = orderRepository.findOrderById(orderId);
         validateOrderUser(user, order);
         return order;
     }
 
     public List<Order> findOrdersByRestaurant(UUID restaurantId) {
-        return orderRepositoryImpl.findOrdersByRestaurant(restaurantId);
+        return orderRepository.findOrdersByRestaurant(restaurantId);
     }
 
     public List<OrderHistory> findOrderStatusProgress(UUID orderId) {
-        return orderHistoryRepositoryImpl.findOrderStatusProgress(orderId);
+        return orderHistoryRepository.findOrderStatusProgress(orderId);
     }
 
 

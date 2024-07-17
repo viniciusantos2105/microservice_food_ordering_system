@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class OrderRepositoryImpl {
+public class OrderRepositoryImpl implements OrderRepositoryCustom{
 
     @PersistenceContext
     private EntityManager entityManager;

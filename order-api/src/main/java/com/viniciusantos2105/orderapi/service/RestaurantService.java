@@ -2,7 +2,6 @@ package com.viniciusantos2105.orderapi.service;
 
 import com.viniciusantos2105.orderapi.domain.restaurant.Food;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
-import org.antlr.v4.runtime.Token;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
