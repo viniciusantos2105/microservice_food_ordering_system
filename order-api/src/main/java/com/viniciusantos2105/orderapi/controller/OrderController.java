@@ -1,12 +1,11 @@
 package com.viniciusantos2105.orderapi.controller;
 
 import com.viniciusantos2105.orderapi.adapter.Adapter;
+import com.viniciusantos2105.orderapi.domain.order.OrderHistory;
 import com.viniciusantos2105.orderapi.domain.user.User;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
-import com.viniciusantos2105.orderapi.dto.response.OrderResponseDto;
-import com.viniciusantos2105.orderapi.dto.response.OrderResponseRestaurantDto;
-import com.viniciusantos2105.orderapi.dto.response.OrderStatusResponseDto;
+import com.viniciusantos2105.orderapi.dto.response.*;
 import com.viniciusantos2105.orderapi.service.OrderService;
 import com.viniciusantos2105.orderapi.service.RestaurantService;
 import com.viniciusantos2105.orderapi.service.UserService;
@@ -43,10 +42,17 @@ public class OrderController {
     }
 
     @GetMapping("/status/{orderId}")
-    public ResponseEntity<List<OrderStatusResponseDto>> getOrderStatusProgress(@RequestHeader("Authorization") String token, @PathVariable UUID orderId) {
+    public ResponseEntity<OrderStatusResponseDto> getOrderStatusProgress(@RequestHeader("Authorization") String token, @PathVariable UUID orderId) {
         User user = userService.getUser(token).block();
         userService.verifyTypeUser(user);
-        List<OrderStatusResponseDto> response = orderService.findOrderStatusProgress(orderId).stream().map(orderStatus -> adapter.mapSourceToTarget(orderStatus, OrderStatusResponseDto.class)).toList();
+        List<OrderHistory> historyList = orderService.findOrderStatusProgress(orderId);
+        OrderStatusResponseDto response = new OrderStatusResponseDto();
+        List<FoodsReponseDto> foodsResponse = historyList.get(0).getOrder().getOrderFoods().stream()
+                .map(food -> adapter.mapSourceToTarget(food, FoodsReponseDto.class)).toList();
+        response.setOrderFoods(foodsResponse);
+        List<OrderHistoryResponseDto> orderHistoryResponse = historyList.stream()
+                .map(history -> adapter.mapSourceToTarget(history, OrderHistoryResponseDto.class)).toList();
+        response.setOrderHistory(orderHistoryResponse);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
