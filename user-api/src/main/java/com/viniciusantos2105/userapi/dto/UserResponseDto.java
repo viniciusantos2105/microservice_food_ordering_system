@@ -1,7 +1,7 @@
 package com.viniciusantos2105.userapi.dto;
 
-import com.viniciusantos2105.userapi.domain.user.entity.UserType;
 import com.viniciusantos2105.userapi.domain.user.entity.User;
+import com.viniciusantos2105.userapi.domain.user.entity.UserType;
 import lombok.Getter;
 import lombok.Setter;
 
