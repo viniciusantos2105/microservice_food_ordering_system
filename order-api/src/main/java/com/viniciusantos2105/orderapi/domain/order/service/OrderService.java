@@ -1,18 +1,18 @@
 package com.viniciusantos2105.orderapi.domain.order.service;
 
+import com.viniciusantos2105.orderapi.domain.order.entity.Order;
+import com.viniciusantos2105.orderapi.domain.order.entity.OrderFood;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderStatus;
 import com.viniciusantos2105.orderapi.domain.order.repository.OrderHistoryRepository;
-import com.viniciusantos2105.orderapi.domain.order.entity.Order;
-import com.viniciusantos2105.orderapi.domain.order.entity.OrderFood;
 import com.viniciusantos2105.orderapi.domain.order.repository.OrderRepository;
-import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
+import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
+import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
 import com.viniciusantos2105.orderapi.event.OrderStatusListener;
 import com.viniciusantos2105.orderapi.exception.unauthorized.UnauthorizedAcessException;
-import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -40,14 +40,14 @@ public class OrderService {
 
         orderRepository.save(order);
 
-        order.getOrderFoods().stream().forEach(orderFood -> {
+        order.getOrderFoods().forEach(orderFood -> {
             orderFood.setOrderId(order.getOrderId());
         });
         orderRepository.save(order);
         return order;
     }
 
-    public Order updateOrderStatus(UUID orderId, OrderStatusRequestDto request, String token){
+    public Order updateOrderStatus(UUID orderId, OrderStatusRequestDto request, String token) {
         Order order = orderRepository.findOrderById(orderId);
         restaurantService.isUserRestaurantOwner(token, order.getOrderRestaurant());
         order.addListener(orderStatusListener);

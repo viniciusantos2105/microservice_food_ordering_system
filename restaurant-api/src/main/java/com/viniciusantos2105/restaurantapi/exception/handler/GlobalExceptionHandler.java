@@ -1,11 +1,12 @@
-package com.viniciusantos2105.userapi.exception.handler;
+package com.viniciusantos2105.restaurantapi.exception.handler;
 
-import com.viniciusantos2105.userapi.adapter.ExceptionAdapter;
-import com.viniciusantos2105.userapi.exception.validation.InvalidArgumentsException;
-import com.viniciusantos2105.userapi.exception.validation.ValidationException;
+import com.viniciusantos2105.restaurantapi.adapter.ExceptionAdapter;
+import com.viniciusantos2105.restaurantapi.exception.CustomException;
+import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,11 +17,11 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ValidationExceptionHandler {
+public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<?> validationException(ValidationException exception) {
-        return ResponseEntity.status(exception.status).body(exception.getMessage());
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<String> validationException(CustomException exception) {
+        return new ResponseEntity<>(ExceptionAdapter.toJson(exception), HttpStatusCode.valueOf(exception.status));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

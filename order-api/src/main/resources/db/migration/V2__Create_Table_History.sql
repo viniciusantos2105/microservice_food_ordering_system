@@ -1,9 +1,10 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE
+EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE order_history
 (
     order_history_id  UUID DEFAULT uuid_generate_v4() NOT NULL,
-    order_order_id    UUID NOT NULL,
+    order_order_id    UUID                            NOT NULL,
     order_status      SMALLINT,
     order_status_date TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT pk_order_history PRIMARY KEY (order_history_id)

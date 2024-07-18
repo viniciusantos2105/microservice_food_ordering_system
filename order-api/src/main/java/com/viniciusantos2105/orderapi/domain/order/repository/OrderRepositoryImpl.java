@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class OrderRepositoryImpl implements OrderRepositoryCustom{
+public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -20,7 +20,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom{
         TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order o WHERE o.orderId = :orderId", Order.class);
         query.setParameter("orderId", orderId);
 
-        if(query.getResultList().isEmpty()) {
+        if (query.getResultList().isEmpty()) {
             throw ResourceNotFoundException.create("Pedido não encontrado", "orderId");
         }
         return query.getSingleResult();

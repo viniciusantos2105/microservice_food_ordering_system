@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface OrderRepositoryCustom {
 
     Order findOrderById(UUID orderId);
+
     List<Order> findOrdersByRestaurant(UUID restaurantId);
 }

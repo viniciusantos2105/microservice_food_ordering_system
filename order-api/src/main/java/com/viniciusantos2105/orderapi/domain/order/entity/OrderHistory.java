@@ -21,7 +21,7 @@ public class OrderHistory {
     private OrderStatus orderStatus;
     private Timestamp orderStatusDate;
 
-    public static OrderHistory create(Order order, OrderStatus orderStatus){
+    public static OrderHistory create(Order order, OrderStatus orderStatus) {
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setOrder(order);
         orderHistory.setOrderStatus(orderStatus);

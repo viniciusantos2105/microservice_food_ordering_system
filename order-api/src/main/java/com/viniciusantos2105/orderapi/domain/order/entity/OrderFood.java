@@ -28,7 +28,7 @@ public class OrderFood implements Serializable {
     @Column(name = "restaurant_id")
     private UUID restaurantId;
 
-    public static OrderFood create(Food food){
+    public static OrderFood create(Food food) {
         OrderFood orderFood = new OrderFood();
         orderFood.setFoodName(food.getFoodName());
         orderFood.setFoodDescription(food.getFoodDescription());

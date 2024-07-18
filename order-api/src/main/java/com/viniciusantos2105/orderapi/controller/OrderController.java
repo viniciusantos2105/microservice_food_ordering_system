@@ -2,13 +2,13 @@ package com.viniciusantos2105.orderapi.controller;
 
 import com.viniciusantos2105.orderapi.adapter.Adapter;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
+import com.viniciusantos2105.orderapi.domain.order.service.OrderService;
+import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
 import com.viniciusantos2105.orderapi.domain.user.entity.User;
+import com.viniciusantos2105.orderapi.domain.user.service.UserService;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
 import com.viniciusantos2105.orderapi.dto.response.*;
-import com.viniciusantos2105.orderapi.domain.order.service.OrderService;
-import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
-import com.viniciusantos2105.orderapi.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,7 +65,7 @@ public class OrderController {
     }
 
     @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<OrderResponseRestaurantDto>> getOrdersByRestaurant(@RequestHeader ("Authorization") String token, @PathVariable UUID restaurantId) {
+    public ResponseEntity<List<OrderResponseRestaurantDto>> getOrdersByRestaurant(@RequestHeader("Authorization") String token, @PathVariable UUID restaurantId) {
         User user = userService.getUser(token).block();
         userService.verifyOwnerUser(user);
         restaurantService.isUserRestaurantOwner(token, restaurantId);
