@@ -24,7 +24,7 @@ public class Food {
     @Column(name = "food_price")
     private Double foodPrice;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-   @JoinColumn(name = "restaurant_id")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     public static Food create(Restaurant restaurant, FoodRequestDto request) {

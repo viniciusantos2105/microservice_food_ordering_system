@@ -39,7 +39,7 @@ public class RestaurantService {
 
     public void validateRestaurantOwner(UUID restaurantId, UUID ownerId) {
         Restaurant restaurant = restaurantRepository.findRestaurantById(restaurantId);
-        if(!restaurant.getOwnerId().equals(ownerId)) {
+        if (!restaurant.getOwnerId().equals(ownerId)) {
             throw UnauthorizedAcessException.create("Usuario não tem acesso a esse restaurante", "restaurantId");
         }
     }

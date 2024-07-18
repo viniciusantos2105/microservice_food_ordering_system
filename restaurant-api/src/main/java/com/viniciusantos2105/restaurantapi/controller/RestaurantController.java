@@ -2,13 +2,13 @@ package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
+import com.viniciusantos2105.restaurantapi.domain.user.service.UserService;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseListDto;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
-import com.viniciusantos2105.restaurantapi.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

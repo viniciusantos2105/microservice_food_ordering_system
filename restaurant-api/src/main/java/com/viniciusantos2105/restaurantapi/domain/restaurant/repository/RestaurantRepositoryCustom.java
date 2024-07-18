@@ -4,8 +4,9 @@ import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
 
 import java.util.UUID;
 
-public interface RestaurantRepositoryCustom{
+public interface RestaurantRepositoryCustom {
 
     void validateRestaurantName(String restaurantName);
+
     Restaurant findRestaurantById(UUID restaurantId);
 }

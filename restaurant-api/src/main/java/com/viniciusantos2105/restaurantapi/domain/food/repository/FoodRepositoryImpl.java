@@ -40,7 +40,7 @@ public class FoodRepositoryImpl implements FoodRepositoryCustom {
         return query.getSingleResult();
     }
 
-    public Food findFoodById(UUID fooId){
+    public Food findFoodById(UUID fooId) {
         TypedQuery<Food> query = entityManager.createQuery("SELECT f FROM Food f WHERE f.foodId = :foodId", Food.class);
         query.setParameter("foodId", fooId);
 

@@ -5,12 +5,12 @@ import com.viniciusantos2105.restaurantapi.adapter.Adapter;
 import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
 import com.viniciusantos2105.restaurantapi.domain.food.repository.FoodRepository;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodsListRequestDto;
 import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

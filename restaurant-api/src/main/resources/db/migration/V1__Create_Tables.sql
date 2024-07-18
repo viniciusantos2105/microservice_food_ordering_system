@@ -1,4 +1,5 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE
+EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE food
 (
@@ -13,7 +14,7 @@ CREATE TABLE food
 CREATE TABLE restaurant
 (
     restaurant_id      UUID DEFAULT uuid_generate_v4() NOT NULL,
-    owner_id           UUID NOT NULL ,
+    owner_id           UUID                            NOT NULL,
     restaurant_name    VARCHAR(255),
     restaurant_address VARCHAR(255),
     CONSTRAINT pk_restaurant PRIMARY KEY (restaurant_id)
