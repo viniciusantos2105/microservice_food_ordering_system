@@ -9,6 +9,7 @@
   - Padrão DDD (Domain-Driven Design)
   - Padrão Adapter
   - Padrão Observer
+  - Padrão Factory Method
 
 ## User Api - Funcionalidades
   - Cadastro de usuario
