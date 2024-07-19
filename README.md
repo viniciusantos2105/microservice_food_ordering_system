@@ -1,4 +1,4 @@
-## Microservice sistema de compra e vendas de comidas
+## Microservico - Sistema de compra e vendas de comidas
 
 ## Projetos
   - User Api : Serviço de usuario
@@ -6,7 +6,7 @@
   - Order Api : Serviço de pedidos
 
 ## Design Patterns
-  - Padrão DDD(Domain-Driven Design)
+  - Padrão DDD (Domain-Driven Design)
   - Padrão Adapter
   - Padrão Observer
 
