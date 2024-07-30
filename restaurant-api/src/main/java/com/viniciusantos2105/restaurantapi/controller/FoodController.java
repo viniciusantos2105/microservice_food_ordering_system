@@ -1,10 +1,10 @@
 package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
+import com.viniciusantos2105.restaurantapi.domain.food.contract.IFoodService;
 import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
-import com.viniciusantos2105.restaurantapi.domain.food.service.FoodService;
+import com.viniciusantos2105.restaurantapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
-import com.viniciusantos2105.restaurantapi.domain.user.service.UserService;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodsListRequestDto;
@@ -24,10 +24,10 @@ import java.util.UUID;
 public class FoodController {
 
     private final Adapter adapter;
-    private final UserService userService;
-    private final FoodService foodService;
+    private final IUserService userService;
+    private final IFoodService foodService;
 
-    public FoodController(FoodService foodService, Adapter adapter, UserService userService) {
+    public FoodController(IFoodService foodService, Adapter adapter, IUserService userService) {
         this.foodService = foodService;
         this.adapter = adapter;
         this.userService = userService;

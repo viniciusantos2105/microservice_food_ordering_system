@@ -1,6 +1,7 @@
 package com.viniciusantos2105.userapi.domain.user.service;
 
 import com.viniciusantos2105.userapi.config.security.TokenService;
+import com.viniciusantos2105.userapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.userapi.domain.user.entity.User;
 import com.viniciusantos2105.userapi.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
 
     private final PasswordEncoder encoder;
     private final TokenService tokenService;

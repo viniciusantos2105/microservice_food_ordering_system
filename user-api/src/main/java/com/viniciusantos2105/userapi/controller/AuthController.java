@@ -1,5 +1,6 @@
 package com.viniciusantos2105.userapi.controller;
 
+import com.viniciusantos2105.userapi.domain.auth.contract.IAuthService;
 import com.viniciusantos2105.userapi.domain.auth.service.AuthService;
 import com.viniciusantos2105.userapi.dto.LoginRequestDto;
 import com.viniciusantos2105.userapi.dto.LoginResponseDto;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final IAuthService authService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(IAuthService authService) {
         this.authService = authService;
     }
 

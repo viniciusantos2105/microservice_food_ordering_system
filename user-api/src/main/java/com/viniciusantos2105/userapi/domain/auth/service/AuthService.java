@@ -1,6 +1,7 @@
 package com.viniciusantos2105.userapi.domain.auth.service;
 
 import com.viniciusantos2105.userapi.config.security.TokenService;
+import com.viniciusantos2105.userapi.domain.auth.contract.IAuthService;
 import com.viniciusantos2105.userapi.domain.user.repository.UserRepository;
 import com.viniciusantos2105.userapi.dto.LoginRequestDto;
 import com.viniciusantos2105.userapi.dto.LoginResponseDto;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements IAuthService {
 
     private final PasswordEncoder encoder;
     private final TokenService tokenService;

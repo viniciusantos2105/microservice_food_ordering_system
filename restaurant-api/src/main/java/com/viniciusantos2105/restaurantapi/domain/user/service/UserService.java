@@ -1,5 +1,6 @@
 package com.viniciusantos2105.restaurantapi.domain.user.service;
 
+import com.viniciusantos2105.restaurantapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.UserType;
 import com.viniciusantos2105.restaurantapi.exception.validation.InvalidArgumentsException;
@@ -10,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     private final WebClient webClient;
     @Value("${microservice.url}")

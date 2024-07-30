@@ -2,6 +2,7 @@ package com.viniciusantos2105.restaurantapi.domain.restaurant.service;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
 import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.contract.IRestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.repository.RestaurantRepository;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
@@ -16,15 +17,17 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class RestaurantService {
+public class RestaurantService implements IRestaurantService {
 
     private final Adapter adapter;
     private final RestaurantRepository restaurantRepository;
 
+    @Override
     public List<Restaurant> listRestaurants() {
         return restaurantRepository.findAll();
     }
 
+    @Override
     public Restaurant findRestaurantWithUserValidation(UUID restaurantId, User user) {
         Restaurant restaurant = restaurantRepository.findRestaurantById(restaurantId);
         if (!restaurant.getOwnerId().equals(user.getUserId())) {
@@ -33,10 +36,12 @@ public class RestaurantService {
         return restaurant;
     }
 
+    @Override
     public Restaurant findRestaurantById(UUID restaurantId) {
         return restaurantRepository.findRestaurantById(restaurantId);
     }
 
+    @Override
     public void validateRestaurantOwner(UUID restaurantId, UUID ownerId) {
         Restaurant restaurant = restaurantRepository.findRestaurantById(restaurantId);
         if (!restaurant.getOwnerId().equals(ownerId)) {
@@ -44,12 +49,14 @@ public class RestaurantService {
         }
     }
 
+    @Override
     public Restaurant createRestaurant(RestaurantRequestDto request, User user) {
         restaurantRepository.validateRestaurantName(request.getRestaurantName());
         Restaurant restaurant = Restaurant.create(user, request);
         return restaurantRepository.save(restaurant);
     }
 
+    @Override
     public Restaurant updateRestaurant(UUID restaurantId, RestaurantEditRequestDto request, User user) {
         Restaurant restaurant = findRestaurantWithUserValidation(restaurantId, user);
         update(restaurant, request);
@@ -61,16 +68,19 @@ public class RestaurantService {
         adapter.updateTargetWithSource(updatedRestaurant, restaurant);
     }
 
+    @Override
     public void deleteRestaurant(UUID restaurantId, User user) {
         Restaurant restaurant = findRestaurantWithUserValidation(restaurantId, user);
         restaurantRepository.delete(restaurant);
     }
 
+    @Override
     public void addFoodToMenu(Restaurant restaurant, Food food) {
         restaurant.getRestaurantMenu().add(food);
         restaurantRepository.save(restaurant);
     }
 
+    @Override
     public void removeFood(Restaurant restaurant, Food food) {
         restaurant.getRestaurantMenu().remove(food);
         restaurantRepository.save(restaurant);

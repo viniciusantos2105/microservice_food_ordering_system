@@ -1,5 +1,6 @@
 package com.viniciusantos2105.orderapi.domain.user.service;
 
+import com.viniciusantos2105.orderapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.domain.user.entity.UserType;
 import com.viniciusantos2105.orderapi.exception.unauthorized.UnauthorizedAcessException;
@@ -9,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     private final WebClient webClient;
     @Value("${microservice.user-api.url}")
@@ -19,6 +20,7 @@ public class UserService {
         this.webClient = webClient;
     }
 
+    @Override
     public Mono<User> getUser(String token) {
         return webClient.get()
                 .uri(urlUserApi)
@@ -27,12 +29,14 @@ public class UserService {
                 .bodyToMono(User.class);
     }
 
+    @Override
     public void verifyTypeUser(User user) {
         if (user.getUserType().equals(UserType.OWNER)) {
             throw UnauthorizedAcessException.create("Entre em uma conta de cliente para executar essa ação", "userId");
         }
     }
 
+    @Override
     public void verifyOwnerUser(User user) {
         if (user.getUserType().equals(UserType.CLIENT)) {
             throw UnauthorizedAcessException.create("Entre em uma conta de proprietário para executar essa ação", "userId");

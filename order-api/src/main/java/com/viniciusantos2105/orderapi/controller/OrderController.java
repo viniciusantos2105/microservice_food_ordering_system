@@ -1,11 +1,11 @@
 package com.viniciusantos2105.orderapi.controller;
 
 import com.viniciusantos2105.orderapi.adapter.Adapter;
+import com.viniciusantos2105.orderapi.domain.order.contract.IOrderService;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
-import com.viniciusantos2105.orderapi.domain.order.service.OrderService;
-import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
+import com.viniciusantos2105.orderapi.domain.restaurant.contract.IRestaurantService;
+import com.viniciusantos2105.orderapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.orderapi.domain.user.entity.User;
-import com.viniciusantos2105.orderapi.domain.user.service.UserService;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
 import com.viniciusantos2105.orderapi.dto.response.*;
@@ -22,11 +22,11 @@ import java.util.UUID;
 public class OrderController {
 
     private final Adapter adapter;
-    private final UserService userService;
-    private final OrderService orderService;
-    private final RestaurantService restaurantService;
+    private final IUserService userService;
+    private final IOrderService orderService;
+    private final IRestaurantService restaurantService;
 
-    public OrderController(Adapter adapter, UserService userService, OrderService orderService, RestaurantService restaurantService) {
+    public OrderController(Adapter adapter, IUserService userService, IOrderService orderService, IRestaurantService restaurantService) {
         this.adapter = adapter;
         this.userService = userService;
         this.orderService = orderService;

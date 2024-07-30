@@ -1,6 +1,7 @@
 package com.viniciusantos2105.userapi.controller;
 
 import com.viniciusantos2105.userapi.adapter.Adapter;
+import com.viniciusantos2105.userapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.userapi.domain.user.entity.User;
 import com.viniciusantos2105.userapi.domain.user.service.UserService;
 import com.viniciusantos2105.userapi.dto.UserRequestDto;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService service;
+    private final IUserService service;
     private final Adapter adapter;
 
 
