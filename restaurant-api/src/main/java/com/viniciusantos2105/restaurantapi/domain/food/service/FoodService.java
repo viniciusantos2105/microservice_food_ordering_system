@@ -2,10 +2,11 @@ package com.viniciusantos2105.restaurantapi.domain.food.service;
 
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
+import com.viniciusantos2105.restaurantapi.domain.food.contract.IFoodService;
 import com.viniciusantos2105.restaurantapi.domain.food.entity.Food;
 import com.viniciusantos2105.restaurantapi.domain.food.repository.FoodRepository;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.contract.IRestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.FoodRequestDto;
@@ -19,12 +20,13 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class FoodService {
+public class FoodService implements IFoodService {
 
     private final Adapter adapter;
-    private final RestaurantService restaurantService;
+    private final IRestaurantService restaurantService;
     private final FoodRepository foodRepository;
 
+    @Override
     public Food createFood(UUID restaurantId, FoodRequestDto request, User user) {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         foodRepository.validateFoodName(request.getFoodName(), restaurantId);
@@ -33,6 +35,7 @@ public class FoodService {
         return foodRepository.save(food);
     }
 
+    @Override
     public List<Food> findFoodById(FoodsListRequestDto request) {
         List<Food> foodList = request.getFoodsSelecteds().stream()
                 .map(foodRepository::findFoodById)
@@ -45,11 +48,13 @@ public class FoodService {
         return foodList;
     }
 
+    @Override
     public List<Food> listFoodsByRestaurant(UUID restaurantId) {
         Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
         return restaurant.getRestaurantMenu();
     }
 
+    @Override
     public Food updateFood(UUID restaurantId, UUID foodId, FoodEditRequestDto request, User user) {
         restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         foodRepository.validateFoodName(request.getFoodName(), restaurantId);
@@ -63,6 +68,7 @@ public class FoodService {
         adapter.updateTargetWithSource(updatedFood, food);
     }
 
+    @Override
     public void deleteFood(UUID restaurantId, UUID foodId, User user) {
         Restaurant restaurant = restaurantService.findRestaurantWithUserValidation(restaurantId, user);
         Food food = foodRepository.findFoodByIdAndRestaurant(restaurantId, foodId);

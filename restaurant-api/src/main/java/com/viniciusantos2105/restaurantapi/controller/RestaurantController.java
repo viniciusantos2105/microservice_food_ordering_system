@@ -1,10 +1,10 @@
 package com.viniciusantos2105.restaurantapi.controller;
 
 import com.viniciusantos2105.restaurantapi.adapter.Adapter;
+import com.viniciusantos2105.restaurantapi.domain.restaurant.contract.IRestaurantService;
 import com.viniciusantos2105.restaurantapi.domain.restaurant.entity.Restaurant;
-import com.viniciusantos2105.restaurantapi.domain.restaurant.service.RestaurantService;
+import com.viniciusantos2105.restaurantapi.domain.user.contract.IUserService;
 import com.viniciusantos2105.restaurantapi.domain.user.entity.User;
-import com.viniciusantos2105.restaurantapi.domain.user.service.UserService;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantEditRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.requests.RestaurantRequestDto;
 import com.viniciusantos2105.restaurantapi.dto.responses.RestaurantResponseDto;
@@ -21,11 +21,11 @@ import java.util.UUID;
 @RequestMapping("/api/restaurant")
 public class RestaurantController {
 
-    private final RestaurantService restaurantService;
-    private final UserService userService;
+    private final IRestaurantService restaurantService;
+    private final IUserService userService;
     private final Adapter adapter;
 
-    public RestaurantController(RestaurantService restaurantService, UserService userService, Adapter adapter) {
+    public RestaurantController(IRestaurantService restaurantService, IUserService userService, Adapter adapter) {
         this.restaurantService = restaurantService;
         this.userService = userService;
         this.adapter = adapter;
