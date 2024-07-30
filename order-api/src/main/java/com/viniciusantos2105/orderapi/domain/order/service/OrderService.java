@@ -1,13 +1,14 @@
 package com.viniciusantos2105.orderapi.domain.order.service;
 
+import com.viniciusantos2105.orderapi.domain.order.contract.IOrderService;
 import com.viniciusantos2105.orderapi.domain.order.entity.Order;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderFood;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderHistory;
 import com.viniciusantos2105.orderapi.domain.order.entity.OrderStatus;
 import com.viniciusantos2105.orderapi.domain.order.repository.OrderHistoryRepository;
 import com.viniciusantos2105.orderapi.domain.order.repository.OrderRepository;
+import com.viniciusantos2105.orderapi.domain.restaurant.contract.IRestaurantService;
 import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
-import com.viniciusantos2105.orderapi.domain.restaurant.service.RestaurantService;
 import com.viniciusantos2105.orderapi.domain.user.entity.User;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import com.viniciusantos2105.orderapi.dto.request.OrderStatusRequestDto;
@@ -22,13 +23,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class OrderService {
+public class OrderService implements IOrderService {
 
     private final OrderStatusListener orderStatusListener;
-    private final RestaurantService restaurantService;
+    private final IRestaurantService restaurantService;
     private final OrderRepository orderRepository;
     private final OrderHistoryRepository orderHistoryRepository;
 
+    @Override
     public Order createOrder(FoodsListRequestDto request, User user) {
         List<Food> foodList = restaurantService.getFoods(request);
         List<OrderFood> foods = foodList.stream()
@@ -47,6 +49,7 @@ public class OrderService {
         return order;
     }
 
+    @Override
     public Order updateOrderStatus(UUID orderId, OrderStatusRequestDto request, String token) {
         Order order = orderRepository.findOrderById(orderId);
         restaurantService.isUserRestaurantOwner(token, order.getOrderRestaurant());
@@ -56,21 +59,20 @@ public class OrderService {
         orderRepository.save(order);
         return order;
     }
-
+    @Override
     public Order findOrderById(UUID orderId, User user) {
         Order order = orderRepository.findOrderById(orderId);
         validateOrderUser(user, order);
         return order;
     }
-
+    @Override
     public List<Order> findOrdersByRestaurant(UUID restaurantId) {
         return orderRepository.findOrdersByRestaurant(restaurantId);
     }
-
+    @Override
     public List<OrderHistory> findOrderStatusProgress(UUID orderId) {
         return orderHistoryRepository.findOrderStatusProgress(orderId);
     }
-
 
     private void validateOrderUser(User user, Order order) {
         if (!order.getOrderUser().equals(user.getUserId())) {

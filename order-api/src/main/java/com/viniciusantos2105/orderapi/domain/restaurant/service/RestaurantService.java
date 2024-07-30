@@ -1,5 +1,6 @@
 package com.viniciusantos2105.orderapi.domain.restaurant.service;
 
+import com.viniciusantos2105.orderapi.domain.restaurant.contract.IRestaurantService;
 import com.viniciusantos2105.orderapi.domain.restaurant.entity.Food;
 import com.viniciusantos2105.orderapi.dto.request.FoodsListRequestDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class RestaurantService {
+public class RestaurantService implements IRestaurantService {
 
     private final WebClient webClient;
     @Value("${microservice.restaurant-api.url}")
@@ -21,6 +22,7 @@ public class RestaurantService {
         this.webClient = webClient;
     }
 
+    @Override
     public List<Food> getFoods(FoodsListRequestDto request) {
         return webClient.post()
                 .uri(urlRestaurantApi + "/food")
@@ -30,6 +32,7 @@ public class RestaurantService {
                 }).block();
     }
 
+    @Override
     public void isUserRestaurantOwner(String token, UUID restaurantId) {
         webClient.get()
                 .uri(urlRestaurantApi + "/" + restaurantId)
